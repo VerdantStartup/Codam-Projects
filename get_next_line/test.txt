@@ -1,0 +1,4 @@
+1st-line
+2nd-line
+This is a new line which is a bit longer than all the other ones
+Last-line
