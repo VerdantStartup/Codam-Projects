@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utiles.c                             :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 15:02:11 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/01 16:38:28 by verdant          ###   ########.fr       */
+/*   Updated: 2022/11/04 12:49:45 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gnl.h"
+#include "get_next_line.h"
 
 // If c exists that means we are using strclen then
 // we look if c exsits inside of buf
@@ -48,7 +48,7 @@ int	ft_strclen(char *buf, char c)
 
 char	*ft_concat(char *s1, char *s2, size_t s1_len, size_t size)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (s2[i] && i < size - 1)

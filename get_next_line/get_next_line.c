@@ -6,11 +6,11 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:56:22 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/02 15:55:20 by verdant          ###   ########.fr       */
+/*   Updated: 2022/11/04 12:52:46 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gnl.h"
+#include "get_next_line.h"
 
 char	*ft_next_line(char *buf, char *current_line)
 {
@@ -21,6 +21,7 @@ char	*ft_next_line(char *buf, char *current_line)
 	cur_len = ft_strclen(current_line, 0);
 	new_len = ft_strclen(buf, 0) - cur_len;
 	next_line = ft_substr(buf, cur_len, new_len);
+	free(buf);
 	return (next_line);
 }
 
@@ -36,11 +37,10 @@ char	*ft_current_line(char *buf)
 		current_line = ft_substr(buf, 0 , 1 + line_len);
 	else
 		current_line = ft_substr(buf, 0, ft_strclen(buf, 0));
-	free(buf);
 	return (current_line);
 }
 
-char	*join_buffers(char *s1, char *s2,size_t *size, int s2_len)
+char	*join_buffers(char *s1, char *s2,int *size, int s2_len)
 {
 	const int	s1_len = ft_strclen(s1, 0);
 	char			*target;
@@ -70,9 +70,11 @@ char	*ft_read(char *static_buf, int fd)
 {
 	int			bytes_read;
 	char		buf_temp[BUFFER_SIZE + 1];
-	size_t	buf_temp_len;
+	int	buf_temp_len;
 
+	// ft_bzero(buf_temp, BUFFER_SIZE);
 	buf_temp_len = BUFFER_SIZE + 1;
+	buf_temp[0] = '\0';
 	while (!ft_strclen(buf_temp, '\n'))
 	{
 		bytes_read = read(fd, buf_temp, BUFFER_SIZE);
@@ -92,6 +94,8 @@ char	*get_next_line(int fd)
 	static char	*static_buf;
 	char				*current_line;
 
+if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (NULL);
 	if (!static_buf)
 	{
 		static_buf = malloc(BUFFER_SIZE + 1 * sizeof(char));
