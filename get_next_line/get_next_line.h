@@ -6,17 +6,19 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 15:03:03 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/11 21:57:37 by mwilsch          ###   ########.fr       */
+/*   Updated: 2022/11/12 14:56:23 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+
 # include <unistd.h>
 # include <stdlib.h>
-# include <fcntl.h>
-# include <stdio.h>
 # include <stdbool.h>
 
 int		ft_strclen(char *buf, bool search_newline);

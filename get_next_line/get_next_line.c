@@ -6,12 +6,14 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:56:22 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/12 14:40:49 by mwilsch          ###   ########.fr       */
+/*   Updated: 2022/11/12 19:01:48 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdbool.h>
+#include <stdio.h>
+#include <fcntl.h>
 
 static char	*trim_buf(char *buf, char *current_line)
 {
@@ -57,7 +59,7 @@ static char	*join_buffers(char *s1, char *s2, int *size, int s2_len)
 	*size *= 2;
 	target = malloc(*size * sizeof(char));
 	if (!target)
-		return (free(target), NULL);
+		return (NULL);
 	while (s1[i] && i < s1_len)
 	{
 		target[i] = s1[i];
@@ -80,13 +82,11 @@ static char	*ft_read(char *static_buf, int fd)
 	{
 		bytes_read = read(fd, buf_temp, BUFFER_SIZE);
 		if (bytes_read == -1)
-			return (free(static_buf), NULL);
+			return (NULL);
 		buf_temp[bytes_read] = '\0';
 		if (bytes_read == 0)
 			break ;
 		static_buf = join_buffers(static_buf, buf_temp, &buf_len, bytes_read);
-		if (!static_buf)
-			return (free(static_buf), NULL);
 	}
 	return (static_buf);
 }
@@ -98,7 +98,6 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		free(static_buf);
 		static_buf = NULL;
 		return (NULL);
 	}
@@ -113,7 +112,7 @@ char	*get_next_line(int fd)
 	else if (!check_char(static_buf))
 		static_buf = ft_read(static_buf, fd);
 	if (!static_buf)
-		return (free(static_buf), NULL);
+		return (NULL);
 	current_line = ft_current_line(static_buf);
 	static_buf = trim_buf(static_buf, current_line);
 	return (current_line);
@@ -137,3 +136,4 @@ char	*get_next_line(int fd)
 // 	}
 // 	return (0);
 // }
+
