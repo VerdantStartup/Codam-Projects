@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 15:02:11 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/12 14:54:51 by mwilsch          ###   ########.fr       */
+/*   Updated: 2022/11/13 03:21:00 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdbool.h>
+#include <string.h>
+#include <stdio.h>
 
 int	ft_strclen(char *buf, bool search_newline)
 {
@@ -33,12 +35,12 @@ int	ft_strclen(char *buf, bool search_newline)
 	return (i);
 }
 
-char	*ft_concat(char *s1, char *s2, int s1_len, int size)
+char	*ft_concat(char *s1, char *s2, int s1_len)
 {
 	int	i;
 
 	i = 0;
-	while (s2[i] && i < size - 1)
+	while (s2[i])
 	{
 		s1[i + s1_len] = s2[i];
 		i++;
@@ -59,7 +61,10 @@ char	*ft_substr(char *src, int start, int len)
 		len = src_len - start;
 	target = malloc(len + 1 * sizeof(char));
 	if (!target)
+	{
+		// printf("4");
 		return (NULL);
+	}
 	while (i < len)
 	{
 		target[i] = src[start];
