@@ -6,7 +6,7 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 15:02:11 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/12 14:54:51 by mwilsch          ###   ########.fr       */
+/*   Updated: 2022/11/14 13:26:24 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ char	*ft_substr(char *src, int start, int len)
 		len = src_len - start;
 	target = malloc(len + 1 * sizeof(char));
 	if (!target)
+	{
+		src = NULL;
 		return (NULL);
+	}
 	while (i < len)
 	{
 		target[i] = src[start];

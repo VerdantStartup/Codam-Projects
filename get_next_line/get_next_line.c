@@ -6,7 +6,7 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:56:22 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/12 19:01:48 by mwilsch          ###   ########.fr       */
+/*   Updated: 2022/11/14 13:34:45 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	*join_buffers(char *s1, char *s2, int *size, int s2_len)
 	int			i;
 
 	i = 0;
-	if (s1_len + s2_len < *size - 1 && s2[0] != '\n')
+	if (s1_len + s2_len < *size - 1 && s2[0] != '\n' && s1[i])
 		return (ft_concat(s1, s2, s1_len, *size));
 	*size *= 2;
 	target = malloc(*size * sizeof(char));
@@ -83,10 +83,12 @@ static char	*ft_read(char *static_buf, int fd)
 		bytes_read = read(fd, buf_temp, BUFFER_SIZE);
 		if (bytes_read == -1)
 			return (NULL);
-		buf_temp[bytes_read] = '\0';
 		if (bytes_read == 0)
 			break ;
+		buf_temp[bytes_read] = '\0';
 		static_buf = join_buffers(static_buf, buf_temp, &buf_len, bytes_read);
+		if (!static_buf)
+			return (NULL);
 	}
 	return (static_buf);
 }
@@ -98,6 +100,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
+		free(static_buf);
 		static_buf = NULL;
 		return (NULL);
 	}
@@ -136,4 +139,3 @@ char	*get_next_line(int fd)
 // 	}
 // 	return (0);
 // }
-
