@@ -6,7 +6,7 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:56:22 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/14 21:36:42 by mwilsch          ###   ########.fr       */
+/*   Updated: 2022/11/15 15:53:13 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ static char	*trim_buf(char *buf, char *current_line)
 
 	i = 0;
 	if (!current_line)
-		return (NULL);
+		return (buf = NULL, NULL);
 	cur_len = ft_strclen(current_line, false);
 		next_line = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!next_line)
-		return (free(buf), NULL);
+		return (buf = NULL, free(buf), NULL);
 	while (buf[cur_len + i])
 	{
 		next_line[i] = buf[cur_len + i];
@@ -35,6 +35,7 @@ static char	*trim_buf(char *buf, char *current_line)
 	}
 	next_line[i] = '\0';
 	free(buf);
+	buf = NULL
 	return (next_line);
 }
 
@@ -44,9 +45,9 @@ static char	*ft_current_line(char *buf)
 	int		line_len;
 
 	if (!buf)
-		return (NULL);
+		return (buf = NULL, NULL);
 	if (!(*buf))
-		return (free(buf), NULL);
+		return (buf = NULL, free(buf), NULL);
 	line_len = ft_strclen(buf, true);
 	if (line_len || buf[0] == '\n')
 		current_line = ft_substr(buf, 0, 1 + line_len);
@@ -65,7 +66,7 @@ static char	*join_buffers(char *s1, char *s2, int *size, int s2_len)
 	if (s1_len + s2_len < *size - 1 && s2[0] != '\n' && s1[i])
 		return (ft_concat(s1, s2, s1_len));
 	*size *= 2;
-	target = malloc((*size) * sizeof(char));
+	target = malloc(*size * sizeof(char));
 	if (!target)
 		return (NULL);
 	while (s1[i] && i < s1_len)
@@ -132,7 +133,7 @@ char	*get_next_line(int fd)
 // int main(void)
 // {
 // 	int fd; 
-// 	fd = open("largt.txt", O_RDONLY);
+// 	fd = open("larget.txt", O_RDONLY);
 // 	int i = 1;
 // 	char	*str;
 // 	str = get_next_line(fd);
