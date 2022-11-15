@@ -6,7 +6,7 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 15:02:11 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/15 15:54:12 by mwilsch          ###   ########.fr       */
+/*   Updated: 2022/11/15 16:01:55 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ int	ft_strclen(char *buf, bool search_newline)
 	return (i);
 }
 
-char	*ft_concat(char *s1, char *s2, int s1_len, int size)
+char	*ft_concat(char *s1, char *s2, int s1_len)
 {
 	int	i;
 
 	i = 0;
-	while (s2[i] && i < size - 1)
+	while (s2[i])
 	{
 		s1[i + s1_len] = s2[i];
 		i++;

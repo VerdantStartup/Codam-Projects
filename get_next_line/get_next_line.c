@@ -6,7 +6,7 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:56:22 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/15 15:53:13 by mwilsch          ###   ########.fr       */
+/*   Updated: 2022/11/15 16:02:21 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ static char	*trim_buf(char *buf, char *current_line)
 
 	i = 0;
 	if (!current_line)
-		return (buf = NULL, NULL);
+		return (NULL);
 	cur_len = ft_strclen(current_line, false);
 		next_line = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!next_line)
-		return (buf = NULL, free(buf), NULL);
+		return (NULL);
 	while (buf[cur_len + i])
 	{
 		next_line[i] = buf[cur_len + i];
@@ -35,7 +35,6 @@ static char	*trim_buf(char *buf, char *current_line)
 	}
 	next_line[i] = '\0';
 	free(buf);
-	buf = NULL
 	return (next_line);
 }
 
@@ -45,9 +44,9 @@ static char	*ft_current_line(char *buf)
 	int		line_len;
 
 	if (!buf)
-		return (buf = NULL, NULL);
+		return (NULL);
 	if (!(*buf))
-		return (buf = NULL, free(buf), NULL);
+		return (free(buf), NULL);
 	line_len = ft_strclen(buf, true);
 	if (line_len || buf[0] == '\n')
 		current_line = ft_substr(buf, 0, 1 + line_len);
