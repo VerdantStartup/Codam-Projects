@@ -1,19 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 14:56:22 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/14 21:36:42 by mwilsch          ###   ########.fr       */
+/*   Created: 2022/11/14 13:38:30 by mwilsch           #+#    #+#             */
+/*   Updated: 2022/11/14 21:03:31 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdbool.h>
-// #include <stdio.h>
-// #include <fcntl.h>
+#include "get_next_line_bonus.h"
 
 static char	*trim_buf(char *buf, char *current_line)
 {
@@ -25,7 +22,7 @@ static char	*trim_buf(char *buf, char *current_line)
 	if (!current_line)
 		return (NULL);
 	cur_len = ft_strclen(current_line, false);
-		next_line = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	next_line = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!next_line)
 		return (free(buf), NULL);
 	while (buf[cur_len + i])
@@ -65,7 +62,7 @@ static char	*join_buffers(char *s1, char *s2, int *size, int s2_len)
 	if (s1_len + s2_len < *size - 1 && s2[0] != '\n' && s1[i])
 		return (ft_concat(s1, s2, s1_len));
 	*size *= 2;
-	target = malloc((*size) * sizeof(char));
+	target = malloc(*size * sizeof(char));
 	if (!target)
 		return (NULL);
 	while (s1[i] && i < s1_len)
@@ -103,36 +100,36 @@ static char	*ft_read(char *static_buf, int fd)
 
 char	*get_next_line(int fd)
 {
-	static char	*static_buf;
+	static char	*static_buf[OPEN_MAX];
 	char		*current_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		free(static_buf);
-		static_buf = NULL;
+		free(static_buf[fd]);
+		static_buf[fd] = NULL;
 		return (NULL);
 	}
-	if (!static_buf)
+	if (!static_buf[fd])
 	{
-		static_buf = malloc((BUFFER_SIZE + 1) * sizeof(char));
-		if (!static_buf)
+		static_buf[fd] = malloc((BUFFER_SIZE + 1) * sizeof(char));
+		ft_bzero(static_buf[fd], BUFFER_SIZE + 1);
+		if (!static_buf[fd])
 			return (NULL);
-		static_buf[0] = '\0';
-		static_buf = ft_read(static_buf, fd);
+		static_buf[fd] = ft_read(static_buf[fd], fd);
 	}
-	else if (!check_char(static_buf))
-		static_buf = ft_read(static_buf, fd);
-	if (!static_buf)
+	else if (!check_char(static_buf[fd]))
+		static_buf[fd] = ft_read(static_buf[fd], fd);
+	if (!static_buf[fd])
 		return (NULL);
-	current_line = ft_current_line(static_buf);
-	static_buf = trim_buf(static_buf, current_line);
+	current_line = ft_current_line(static_buf[fd]);
+	static_buf[fd] = trim_buf(static_buf[fd], current_line);
 	return (current_line);
 }
 
 // int main(void)
 // {
 // 	int fd; 
-// 	fd = open("largt.txt", O_RDONLY);
+// 	fd = open("test.txt", O_RDONLY);
 // 	int i = 1;
 // 	char	*str;
 // 	str = get_next_line(fd);

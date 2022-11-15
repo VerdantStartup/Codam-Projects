@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 15:02:11 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/14 21:33:12 by mwilsch          ###   ########.fr       */
+/*   Updated: 2022/11/14 20:10:41 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <stdbool.h>
 
 int	ft_strclen(char *buf, bool search_newline)
@@ -57,9 +57,10 @@ char	*ft_substr(char *src, int start, int len)
 	src_len = ft_strclen(src, false);
 	if (start + len > src_len)
 		len = src_len - start;
-	target = malloc((len + 1) * sizeof(char));
+	target = malloc(len + 1 * sizeof(char));
 	if (!target)
 	{
+		src = NULL;
 		return (NULL);
 	}
 	while (i < len)
@@ -84,4 +85,16 @@ int	check_char(char *buf)
 		i++;
 	}
 	return (0);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *)s)[i] = '\0';
+		i++;
+	}
 }

@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_printf_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/27 15:03:03 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/14 21:13:03 by mwilsch          ###   ########.fr       */
+/*   Created: 2022/10/24 19:34:29 by mwilsch           #+#    #+#             */
+/*   Updated: 2022/10/25 13:21:36 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "ft_printf.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
-# endif
+size_t	ft_strclen(const char *s, char c)
+{
+	size_t	i;
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdbool.h>
+	i = 0;
+	while (*s != c && *s != 0)
+	{
+		i++;
+		s++;
+	}
+	return (i);
+}
 
-int		ft_strclen(char *buf, bool search_newline);
-char	*ft_concat(char *s1, char *s2, int s1_len);
-char	*ft_substr(char *src, int start, int len);
-char	*get_next_line(int fd);
-int		check_char(char *buf);
+size_t	ft_strlen(char *s)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
