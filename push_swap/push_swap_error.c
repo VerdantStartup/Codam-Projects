@@ -6,13 +6,11 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 08:36:03 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/25 10:02:18 by verdant          ###   ########.fr       */
+/*   Updated: 2022/11/25 15:11:01 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <string.h>
-#include <stdio.h>
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

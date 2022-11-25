@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:14:57 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/11/25 11:44:42 by verdant          ###   ########.fr       */
+/*   Updated: 2022/11/25 15:23:32 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,25 @@
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdio.h> // <-- Delete after before handing in the project
 
 /*			Stacks			*/
 
+// typedef struct s_list
+// {
+// 	int			data;
+// 	struct	s_list *next;
+// }	t_list_a;
+
 typedef struct s_list
 {
+	struct	s_list *prev;
 	int			data;
 	struct	s_list *next;
 }	t_list_a;
+
+/*			Utilities			*/
+int		ft_atoi(const char *str);
 
 /*			Error Handling			*/
 bool	checkDups(char **argv, int argc);
@@ -35,9 +46,9 @@ t_list_a	*addEnd(t_list_a *tail, int data);
 t_list_a	*createList(t_list_a *tail, char **argv, int argc);
 
 
-/*			Utilities			*/
-int		ft_atoi(const char *str);
-
+/*			Operations			*/
+void	swapA(t_list_a *tail);
+void	rotateA(t_list_a *tail);
 
 
 #endif
