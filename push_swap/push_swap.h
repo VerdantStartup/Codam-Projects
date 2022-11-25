@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:14:57 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/11/25 18:45:57 by verdant          ###   ########.fr       */
+/*   Updated: 2022/11/25 20:56:04 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,23 @@
 
 /*			Stacks			*/
 
-// typedef struct s_list
-// {
-// 	int			data;
-// 	struct	s_list *next;
-// }	t_list_a;
-
-typedef struct s_list
+typedef struct s_list_a
 {
-	struct	s_list *prev;
+	struct	s_list_a *prev;
 	int			data;
-	struct	s_list *next;
+	struct	s_list_a *next;
 }	t_list_a;
 
+typedef struct s_list_b
+{
+	struct	s_list_b *prev;
+	int			data;
+	struct	s_list_b *next;
+}	t_list_b;
+
 /*			Utilities			*/
-int		ft_atoi(const char *str);
+int				ft_atoi(const char *str);
+t_list_a	*delLast_A(t_list_a *tail_a);
 
 /*			Error Handling			*/
 bool	checkDups(char **argv, int argc);
@@ -41,15 +43,18 @@ bool	ft_isdigit(char **argv, int argc);
 int		ft_strcmp(const char *s1, const char *s2);
 
 /*			Parsing Data			*/
-t_list_a	*firstNode(int data);
-t_list_a	*addEnd(t_list_a *tail, int data);
+t_list_a	*firstNode_A(int data);
+t_list_b	*firstNode_B(int data);
+t_list_a	*addEnd_A(t_list_a *tail, int data);
+t_list_b	*addEnd_B(t_list_b *tail, int data);
 t_list_a	*createList(t_list_a *tail, char **argv, int argc);
 
-
 /*			Operations			*/
-void	swapA(t_list_a *tail);
-void	rotateA(t_list_a *tail);
-void	reverseRotateA(t_list_a *tail);
+void			swapA(t_list_a *tail);
+void			rotateA(t_list_a *tail);
+void			reverseRotateA(t_list_a *tail);
+t_list_b	*pushB(t_list_a *tail_a, t_list_b *tail_b);
+
 
 
 #endif

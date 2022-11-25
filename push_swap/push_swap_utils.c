@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:18:42 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/11/25 10:07:14 by verdant          ###   ########.fr       */
+/*   Updated: 2022/11/25 20:55:15 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,15 @@ int	ft_atoi(const char *str)
 	if (res == 0)
 		return (0);
 	return (res * sign);
+}
+
+t_list_a	*delLast_A(t_list_a *tail_a)
+{
+	t_list_a	*temp;
+	
+	temp = tail_a->prev;
+	temp->next = tail_a->next;
+	tail_a->next->prev = temp;
+	tail_a = temp;
+	return (tail_a);
 }
