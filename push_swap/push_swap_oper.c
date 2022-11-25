@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_utils.c                                  :+:      :+:    :+:   */
+/*   push_swap_oper.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/19 15:18:42 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/11/25 10:07:14 by verdant          ###   ########.fr       */
+/*   Created: 2022/11/25 11:07:24 by verdant           #+#    #+#             */
+/*   Updated: 2022/11/25 11:16:11 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atoi(const char *str)
-{
-	int	res;
-	int	i;
-	int	sign;
-
-	res = 0;
-	i = 0;
-	sign = 1;
-	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n'
-		|| str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
-		i++;
-	if (str[i] == '-')
-	{
-		sign = -1;
-		i++;
-	}
-	else if (str[i] == '+')
-		i++;
-	while (str[i] && str[i] >= '0' && str[i] <= '9')
-		res = res * 10 + str[i++] - '0';
-	if (res == 0)
-		return (0);
-	return (res * sign);
-}
+// Swap first two nodes data keys
+	// 1. Traverse to the second to last node
+	// 2. Store data of second to last node in temp 
+		// int temp = temp_ptr.data
+	// 3. Change data of second to last node with last node data
+		// temp_ptr.data = temp_ptr.next.data
+	// Change last node data
+		// temp_ptr.next.data = temp
+		
