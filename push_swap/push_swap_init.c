@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:07:52 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/25 16:20:11 by verdant          ###   ########.fr       */
+/*   Updated: 2022/11/25 18:12:24 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,26 @@ t_list_a *addEnd(t_list_a *tail, int data)
 	return (tail);
 }
 
+// I'm not sure if I parsed numbers the right way or the wrong way around
+
+// Parsing the end of argv to start
+
+// t_list_a	*createList(t_list_a *tail, char **argv, int argc)
+// {
+// 	int	i;
+
+// 	tail = firstNode(ft_atoi(argv[1]));
+// 	i = 2;
+// 	while (i < argc)
+// 	{
+// 		tail = addEnd(tail, ft_atoi(argv[i]));
+// 		i++;
+// 	}
+// 	return (tail);
+// }
+
+// Parsing from start of argv to end
+
 t_list_a	*createList(t_list_a *tail, char **argv, int argc)
 {
 	int	i;
@@ -59,7 +79,6 @@ t_list_a	*createList(t_list_a *tail, char **argv, int argc)
 	}
 	return (tail);
 }
-
 
 
 

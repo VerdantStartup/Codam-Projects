@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:34:21 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/11/25 16:38:44 by verdant          ###   ########.fr       */
+/*   Updated: 2022/11/25 19:12:06 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,15 @@ int main(int argc, char *argv[])
 		return (0);
 
 	tail = createList(tail, argv, argc);
-	printf("%d", tail->next->data);
-	// rotateA(tail);
+	printf("Top: %d\n", tail->data);
+	printf("Mid: %d\n", tail->prev->data);
+	printf("Mid: %d\n", tail->prev->next->data);
+	printf("Bottom: %d\n\n", tail->prev->prev->next->data);
+	reverseRotateA(tail);
+	printf("Top: %d\n", tail->data);
+	printf("Mid: %d\n", tail->prev->data);
+	printf("Mid: %d\n", tail->prev->prev->data);
+	printf("Bottom: %d\n\n", tail->prev->prev->prev->data);
 }
 
 // Tester main

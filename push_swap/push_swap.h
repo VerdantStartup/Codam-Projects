@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:14:57 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/11/25 15:23:32 by verdant          ###   ########.fr       */
+/*   Updated: 2022/11/25 18:45:57 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_list_a	*createList(t_list_a *tail, char **argv, int argc);
 /*			Operations			*/
 void	swapA(t_list_a *tail);
 void	rotateA(t_list_a *tail);
+void	reverseRotateA(t_list_a *tail);
 
 
 #endif

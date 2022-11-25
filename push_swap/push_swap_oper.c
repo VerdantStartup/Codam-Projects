@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 11:07:24 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/25 15:44:18 by verdant          ###   ########.fr       */
+/*   Updated: 2022/11/25 19:14:45 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,11 @@
 
 void	swapA(t_list_a *tail)
 {
-	// printf("Before swap: Last node: |%d|\t", tail->data);
-	// printf("Second to last node: |%d|\n\n", tail->prev->data);
-
 	int	storeData;
 
-	storeData = tail->data; // Last node's data
+	storeData = tail->data;
 	tail->data = tail->prev->data;
 	tail->prev->data = storeData;
-
-	// printf("After swap: Last node: |%d|\t", tail->data);
-	// printf("Second to last node: |%d|", tail->prev->data);
 }
 
 
@@ -63,30 +57,44 @@ void	swapA(t_list_a *tail)
 			// temp_ptr.data = store Int
 void	rotateA(t_list_a *tail)
 {
-	int	storeData;
-	t_list_a *temp_ptr;
+	int				storeData;
+	t_list_a	*temp_ptr;
 	
 	storeData = tail->next->data;
 	temp_ptr = tail;
 
-
 	// Switching bottom node data with top node data
-	// temp_ptr->next->data = tail->data;
+	temp_ptr->next->data = tail->data;
 
-	// Switching last node data with prev node data
-		// temp_ptr->data = temp_ptr->prev->data;
-	// while (temp_ptr->prev != tail->next)
-	// {
-	// 	temp_ptr->data = temp_ptr->prev->data;
-	// 	temp_ptr = temp_ptr->prev;
-	// }
+	// Shifting up middle numbers
+	while (temp_ptr->prev != tail->next)
+	{
+		temp_ptr->data = temp_ptr->prev->data;
+		temp_ptr = temp_ptr->prev;
+	}
 
-	// printing to test
-	t_list_a *p = tail->next;
-	printf("%d", tail->data);
-	// do
-	// {
-	// 	printf("%d\n", p->data);
-	// 	p = p->next;
-	// } while (p != tail->next);
+	// Second to bottom node
+	temp_ptr->data = storeData;
+}
+
+/*			Reverse Rotate			*/
+
+void	reverseRotateA(t_list_a *tail)
+{
+	t_list_a	*temp_ptr;
+	int	storeData;
+	int	storeData2;
+
+	temp_ptr = tail;
+	storeData = temp_ptr->prev->data;
+	temp_ptr->prev->data = temp_ptr->data;
+	temp_ptr = temp_ptr->prev;
+	while (temp_ptr->prev != tail)
+	{
+		storeData2 = temp_ptr->prev->data;
+		temp_ptr->prev->data = storeData;
+		storeData = storeData2;
+		temp_ptr = temp_ptr->prev;
+	}
+	temp_ptr->prev->data = storeData;
 }
