@@ -1,43 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_oper.c                                   :+:      :+:    :+:   */
+/*   push_swap_oper_b.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 11:07:24 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/25 21:00:42 by verdant          ###   ########.fr       */
+/*   Created: 2022/11/26 12:21:11 by verdant           #+#    #+#             */
+/*   Updated: 2022/11/26 12:55:09 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// Tail points to the last node
-
-/*			Swap			*/
-void	swapA(t_list_a *tail_a)
+void	swapB(t_list_a *tail_b)
 {
 	int	storeData;
 
-	storeData = tail_a->data;
-	tail_a->data = tail_a->prev->data;
-	tail_a->prev->data = storeData;
+	storeData = tail_b->data;
+	tail_b->data = tail_b->prev->data;
+	tail_b->prev->data = storeData;
 }
 
-/*			Rotate			*/
-void	rotateA(t_list_a *tail_a)
+void	rotateB(t_list_a *tail_b)
 {
 	int				storeData;
 	t_list_a	*temp_ptr;
 	
-	storeData = tail_a->next->data;
-	temp_ptr = tail_a;
+	storeData = tail_b->next->data;
+	temp_ptr = tail_b;
 
 	// Switching bottom node data with top node data
-	temp_ptr->next->data = tail_a->data;
+	temp_ptr->next->data = tail_b->data;
 
 	// Shifting up middle numbers
-	while (temp_ptr->prev != tail_a->next)
+	while (temp_ptr->prev != tail_b->next)
 	{
 		temp_ptr->data = temp_ptr->prev->data;
 		temp_ptr = temp_ptr->prev;
@@ -47,18 +43,17 @@ void	rotateA(t_list_a *tail_a)
 	temp_ptr->data = storeData;
 }
 
-/*			Reverse Rotate			*/
-void	reverseRotateA(t_list_a *tail_a)
+void	reverseRotateB(t_list_a *tail_b)
 {
 	t_list_a	*temp_ptr;
 	int	storeData;
 	int	storeData2;
 
-	temp_ptr = tail_a;
+	temp_ptr = tail_b;
 	storeData = temp_ptr->prev->data;
 	temp_ptr->prev->data = temp_ptr->data;
 	temp_ptr = temp_ptr->prev;
-	while (temp_ptr->prev != tail_a)
+	while (temp_ptr->prev != tail_b)
 	{
 		storeData2 = temp_ptr->prev->data;
 		temp_ptr->prev->data = storeData;
@@ -68,19 +63,11 @@ void	reverseRotateA(t_list_a *tail_a)
 	temp_ptr->prev->data = storeData;
 }
 
-/*			Push B			*/
-
-t_list_b	*pushB(t_list_a *tail_a, t_list_b *tail_b)
+void	pushA(t_list_b *tail_b, t_list_a *tail_a)
 {
-	if (!tail_b)
-	{
-		tail_b = firstNode_B(tail_a->data);
-		tail_a = delLast_A(tail_a);
-	}
+	if (!tail_a)
+		tail_a = firstNode_A(tail_b->data);
 	else
-	{
-		tail_b = addEnd_B(tail_b, tail_a->data);
-		tail_a = delLast_A(tail_a);
-	}
-	return (tail_b);
+		tail_a = addEnd_A(tail_a, tail_b->data);
+	tail_b = delLast_B(tail_b);
 }

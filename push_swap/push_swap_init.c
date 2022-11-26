@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:07:52 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/25 20:54:25 by verdant          ###   ########.fr       */
+/*   Updated: 2022/11/26 12:54:20 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ t_list_b	*firstNode_B(int data)
 	return (temp);
 }
 
-t_list_a *addEnd_A(t_list_a *tail, int data)
+t_list_a *addEnd_A(t_list_a *tail_a, int data)
 {
 	t_list_a	*temp;
 	t_list_a	*new;
 
-	temp = tail->next; // First node address
+	temp = tail_a->next; // First node address
 	new = malloc(sizeof(t_list_a));
 	
 	// Initalsing node
@@ -47,20 +47,20 @@ t_list_a *addEnd_A(t_list_a *tail, int data)
 	new->next = NULL;
 
 	// Updating Pointers
-	new->prev = tail; // Address of old last node
+	new->prev = tail_a; // Address of old last node
 	new->next = temp; // Address of first node
 	temp->prev = new; // First node prev pointing to last node
-	tail->next = new; // Pointing old last node to new last node
-	tail = new; // Tail now points to last node
-	return (tail);
+	tail_a->next = new; // Pointing old last node to new last node
+	tail_a = new; // Tail_a now points to last node
+	return (tail_a);
 }
 
-t_list_b *addEnd_B(t_list_b *tail, int data)
+t_list_b *addEnd_B(t_list_b *tail_b, int data)
 {
 	t_list_b	*temp;
 	t_list_b	*new;
 
-	temp = tail->next; // First node address
+	temp = tail_b->next; // First node address
 	new = malloc(sizeof(t_list_b));
 	
 	// Initalsing node
@@ -69,12 +69,12 @@ t_list_b *addEnd_B(t_list_b *tail, int data)
 	new->next = NULL;
 
 	// Updating Pointers
-	new->prev = tail; // Address of old last node
+	new->prev = tail_b; // Address of old last node
 	new->next = temp; // Address of first node
 	temp->prev = new; // First node prev pointing to last node
-	tail->next = new; // Pointing old last node to new last node
-	tail = new; // Tail now points to last node
-	return (tail);
+	tail_b->next = new; // Pointing old last node to new last node
+	tail_b = new; // Tail_b now points to last node
+	return (tail_b);
 }
 
 // I'm not sure if I parsed numbers the right way or the wrong way around

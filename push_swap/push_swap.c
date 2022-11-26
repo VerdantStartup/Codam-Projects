@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:34:21 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/11/25 21:01:12 by verdant          ###   ########.fr       */
+/*   Updated: 2022/11/26 12:33:21 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,9 @@ int main(int argc, char *argv[])
 	bool			onlyInts;
 	bool			noDups;
 	t_list_a	*tail_a;
-	t_list_b	*tail_b;
 
-	tail_b = NULL;
 	if (!(onlyInts = ft_isdigit(argv, argc)) || !(noDups = checkDups(argv, argc)))
 		return (0);
-
 	tail_a = createList(tail_a, argv, argc);
 	
 }
