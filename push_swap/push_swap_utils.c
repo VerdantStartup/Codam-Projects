@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:18:42 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/11/26 12:49:38 by verdant          ###   ########.fr       */
+/*   Updated: 2022/11/28 15:51:04 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,12 @@ t_list_b	*delLast_B(t_list_b *tail_b)
 	temp->next = tail_b->next;
 	tail_b->next->prev = temp;
 	tail_b = temp;
+	return (tail_b);
+}
+
+t_list_b	*addToEmpty_B(t_list_b *tail_b)
+{
+	tail_b->next = NULL;
+	tail_b->prev = NULL;
 	return (tail_b);
 }

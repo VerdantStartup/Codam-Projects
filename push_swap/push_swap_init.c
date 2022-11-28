@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:07:52 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/26 12:54:20 by verdant          ###   ########.fr       */
+/*   Updated: 2022/11/28 19:44:56 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,38 +77,19 @@ t_list_b *addEnd_B(t_list_b *tail_b, int data)
 	return (tail_b);
 }
 
-// I'm not sure if I parsed numbers the right way or the wrong way around
-
-// Parsing the end of argv to start
-
-// t_list_a	*createList(t_list_a *tail, char **argv, int argc)
-// {
-// 	int	i;
-
-// 	tail = firstNode(ft_atoi(argv[1]));
-// 	i = 2;
-// 	while (i < argc)
-// 	{
-// 		tail = addEnd(tail, ft_atoi(argv[i]));
-// 		i++;
-// 	}
-// 	return (tail);
-// }
-
-// Parsing from start of argv to end
-
-t_list_a	*createList(t_list_a *tail, char **argv, int argc)
+t_list_a	*createList(t_list_a *tail_a, char **argv, int argc)
 {
 	int	i;
 
-	tail = firstNode_A(ft_atoi(argv[argc - 1]));
+	tail_a = firstNode_A(ft_atoi(argv[argc - 1]));
 	i = argc - 2;
 	while (i > 0)
 	{
-		tail = addEnd_A(tail, ft_atoi(argv[i]));
+		tail_a = addEnd_A(tail_a, ft_atoi(argv[i]));
 		i--;
 	}
-	return (tail);
+	tail_a->size = argc;
+	return (tail_a);
 }
 
 
