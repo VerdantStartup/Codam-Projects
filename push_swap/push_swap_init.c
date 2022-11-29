@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:07:52 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/28 19:44:56 by verdant          ###   ########.fr       */
+/*   Updated: 2022/11/29 19:40:25 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,81 +15,49 @@
 
 /*			Circular Doubly Implementation			*/
 
-t_list_a	*firstNode_A(int data)
-{
-	t_list_a	*temp = malloc(sizeof(t_list_a));
-	temp->prev = temp;
-	temp->data = data;
-	temp->next = temp;
-	return (temp);
-}
 
-t_list_b	*firstNode_B(int data)
-{
-	t_list_b	*temp = malloc(sizeof(t_list_b));
-	temp->prev = temp;
-	temp->data = data;
-	temp->next = temp;
-	return (temp);
-}
 
-t_list_a *addEnd_A(t_list_a *tail_a, int data)
+bool	add_end(t_list **head, int data)
 {
-	t_list_a	*temp;
-	t_list_a	*new;
-
-	temp = tail_a->next; // First node address
-	new = malloc(sizeof(t_list_a));
+	t_list	*head_node;
+	t_list	*new;
+	t_list	*last_node;
 	
-	// Initalsing node
-	new->prev = NULL;
+	head_node = *head; // Temp of head;
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (false);
 	new->data = data;
-	new->next = NULL;
-
-	// Updating Pointers
-	new->prev = tail_a; // Address of old last node
-	new->next = temp; // Address of first node
-	temp->prev = new; // First node prev pointing to last node
-	tail_a->next = new; // Pointing old last node to new last node
-	tail_a = new; // Tail_a now points to last node
-	return (tail_a);
-}
-
-t_list_b *addEnd_B(t_list_b *tail_b, int data)
-{
-	t_list_b	*temp;
-	t_list_b	*new;
-
-	temp = tail_b->next; // First node address
-	new = malloc(sizeof(t_list_b));
 	
-	// Initalsing node
-	new->prev = NULL;
-	new->data = data;
-	new->next = NULL;
-
-	// Updating Pointers
-	new->prev = tail_b; // Address of old last node
-	new->next = temp; // Address of first node
-	temp->prev = new; // First node prev pointing to last node
-	tail_b->next = new; // Pointing old last node to new last node
-	tail_b = new; // Tail_b now points to last node
-	return (tail_b);
+	if (!head_node) // If no node created
+	{
+		*head = new;
+		new->prev = new;
+		new->next = new;
+		return (true);
+	}
+	last_node = head_node->prev; // Add of last node
+	new->next = head_node; // Add of first node
+	new->prev = last_node; // Point new last node to the old last node
+	head_node->prev = new; // Point head to new last node (Circular)
+	last_node->next = new; // Pointing old last node to the new last
+	return (true);
 }
 
-t_list_a	*createList(t_list_a *tail_a, char **argv, int argc)
+bool	create_list(t_list **head, char **argv, int argc)
 {
 	int	i;
 
-	tail_a = firstNode_A(ft_atoi(argv[argc - 1]));
-	i = argc - 2;
+	i = argc - 1;
 	while (i > 0)
 	{
-		tail_a = addEnd_A(tail_a, ft_atoi(argv[i]));
+		if (!add_end(head, ft_atoi(argv[i])))
+			return (false);
 		i--;
 	}
-	tail_a->size = argc;
-	return (tail_a);
+	(*head)->size = argc - 1;
+	*head = (*head)->prev; // Tracking the last node instead of the first;
+	return (true);
 }
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:18:42 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/11/28 15:51:04 by verdant          ###   ########.fr       */
+/*   Updated: 2022/11/29 17:58:53 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,31 +38,24 @@ int	ft_atoi(const char *str)
 	return (res * sign);
 }
 
-t_list_a	*delLast_A(t_list_a *tail_a)
-{
-	t_list_a	*temp;
+// t_list_a	*delLast_A(t_list_a *tail_a)
+// {
+// 	t_list_a	*temp;
 	
-	temp = tail_a->prev;
-	temp->next = tail_a->next;
-	tail_a->next->prev = temp;
-	tail_a = temp;
-	return (tail_a);
-}
+// 	temp = tail_a->prev;
+// 	temp->next = tail_a->next;
+// 	tail_a->next->prev = temp;
+// 	tail_a = temp;
+// 	return (tail_a);
+// }
 
-t_list_b	*delLast_B(t_list_b *tail_b)
-{
-	t_list_b	*temp;
+// t_list_b	*delLast_B(t_list_b *tail_b)
+// {
+// 	t_list_b	*temp;
 	
-	temp = tail_b->prev;
-	temp->next = tail_b->next;
-	tail_b->next->prev = temp;
-	tail_b = temp;
-	return (tail_b);
-}
-
-t_list_b	*addToEmpty_B(t_list_b *tail_b)
-{
-	tail_b->next = NULL;
-	tail_b->prev = NULL;
-	return (tail_b);
-}
+// 	temp = tail_b->prev;
+// 	temp->next = tail_b->next;
+// 	tail_b->next->prev = temp;
+// 	tail_b = temp;
+// 	return (tail_b);
+// }
