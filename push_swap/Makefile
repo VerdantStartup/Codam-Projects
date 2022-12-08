@@ -1,17 +1,36 @@
-NAME = push_swap.a
+NAME = push_swap
 
-SCRS = push_swap.c push_swap_utils.c \
-push_swap_oper_b.c push_swap_oper_a  \
-push_swap_init.c push_swap_error.c   \
+SRCS = 	push_swap_big.c\
+		push_swap_error.c\
+		push_swap_init.c\
+		push_swap_oper.c\
+		push_swap_sort.c\
+		push_swap_utils.c\
+		push_swap.c\
 
-OFILES = $(SRCS:c=o)
+OFILES = $(SRCS:%.c=%.o)
 
 INCLUDES = push_swap.h
+
+CFLAGS = -Wall -Wextra -Werror 
+
+C_RESET = "\033[0m"
+
+C_GREEN = "\033[92m"
 
 all: $(NAME)
 
 $(NAME): $(OFILES) $(INCLUDES)
-	ar rcs $(NAME) $?
+	@ $(CC) $(CFLAGS) $(OFILES) -o $(NAME)
+	@echo $(C_GREEN)"Compiling library"$(C_RESET)
 
-%.c: %.c
-	$(CC)
+%.o: %.c
+	@ $(CC) $(CFLAGS) -o $@ -c $^
+
+clean:
+	rm -rf $(OFILES)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all

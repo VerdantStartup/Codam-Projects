@@ -13,42 +13,56 @@
 #include "push_swap.h"
 
 /*			Swap			*/
-void	swap(t_list **tail)
+void	swap(t_list **tail, char c)
 {
 	int				storeData;
+
 
 	storeData = (*tail)->data;
 	(*tail)->data = (*tail)->prev->data;
 	(*tail)->prev->data = storeData;
+	if (c == 'a')
+		printf("sa\n"); // change to ft_printf later
+	else
+		printf("sb\n");
 }
 
 /*			Rotate			
 Top element becomes the bottom one*/
-void	rotate(t_list **tail)
+void	rotate(t_list **tail, char c)
 {
 	int			storeData;
+	int			storeSim;
 	t_list		*temp_ptr;
 	
 	storeData = (*tail)->next->data;
+	storeSim = (*tail)->next->sim_num;
 	temp_ptr = (*tail);
 
 	// Switching bottom node data with top node data
 	temp_ptr->next->data = (*tail)->data;
+	temp_ptr->next->sim_num = (*tail)->sim_num;
 
 	// Shifting up middle numbers
 	while (temp_ptr->prev != (*tail)->next)
 	{
 		temp_ptr->data = temp_ptr->prev->data;
+		temp_ptr->sim_num = temp_ptr->prev->sim_num;
 		temp_ptr = temp_ptr->prev;
 	}
 
 	// Second to bottom node
 	temp_ptr->data = storeData;
+	temp_ptr->sim_num = storeSim;
+	if (c == 'a')
+		printf("ra\n"); // change to ft_printf later
+	else
+		printf("rb\n");
 }
 
 /*			Reverse Rotate			
 The bottom element becomes the top element*/
-void	reverse_rotate(t_list **tail)
+void	reverse_rotate(t_list **tail, char c)
 {
 	t_list	*temp_ptr;
 	int		storeData; // For shifting down
@@ -66,6 +80,10 @@ void	reverse_rotate(t_list **tail)
 		temp_ptr = temp_ptr->prev; // Decrement ptr
 	}
 	temp_ptr->prev->data = storeData;
+	if (c == 'a')
+		printf("rra\n"); // change to ft_printf later
+	else
+		printf("rrb\n");
 }
 
 /*			Push			*/
@@ -114,10 +132,14 @@ void	add_to_put(t_list **stack_take, t_list **stack_put)
 }
 
 
-void	push(t_list **stack_take, t_list **stack_put)
+void	push(t_list **stack_take, t_list **stack_put, char c)
 {
 	if (!(*stack_take)) // the stack to take from is empty
 		return ;
+	if (c == 'a')
+		printf("pa\n"); // change to ft_printf later
+	else
+		printf("pb\n");
 	if (!(*stack_put)) // the stack to put to is empty
 		return (split_top(stack_take, stack_put));
 	add_to_put(stack_take, stack_put);
