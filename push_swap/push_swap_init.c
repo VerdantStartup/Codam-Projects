@@ -6,7 +6,7 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 10:07:52 by verdant           #+#    #+#             */
-/*   Updated: 2022/12/08 12:50:19 by mwilsch          ###   ########.fr       */
+/*   Updated: 2022/12/08 20:29:20 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	fill_data(t_list **head, int i, int argc)
 	i = 0;
 	while (--argc > 0)
 	{
-		// (*head)->index = i;
 		(*head)->flag = 'n';
 		(*head)->size = size;
 		(*head)->data_copy = (*head)->data;
@@ -30,7 +29,6 @@ void	fill_data(t_list **head, int i, int argc)
 		i++;
 	}
 }
-
 
 bool	add_end(t_list **head, int data)
 {
@@ -70,7 +68,8 @@ bool	create_list(t_list **head, char **argv, int argc)
 			return (false);
 		i--;
 	}
-	*head = (*head)->prev; // Tracking the last node instead of the first;
-	fill_data(head,i ,  argc);
+	// Tracking the last node instead of the first;
+	*head = (*head)->prev; 
+	fill_data(head, i , argc);
 	return (true);
 }

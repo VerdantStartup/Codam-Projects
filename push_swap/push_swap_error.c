@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 08:36:03 by verdant           #+#    #+#             */
-/*   Updated: 2022/11/25 20:55:06 by verdant          ###   ########.fr       */
+/*   Updated: 2022/12/08 20:11:57 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	ft_isdigit(char **argv, int argc)
 	int		i;
 	int		j;
 	char	*str;
-	
+
 	i = 1;
 	while (i < argc)
 	{
@@ -53,7 +53,7 @@ bool	ft_isdigit(char **argv, int argc)
 	return (true);
 }
 
-bool	checkDups(char **argv, int argc)
+bool	check_dups(char **argv, int argc)
 {
 	int	i;
 	int	j;
@@ -75,4 +75,3 @@ bool	checkDups(char **argv, int argc)
 	}
 	return (true);
 }
-
