@@ -6,7 +6,7 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 20:23:58 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/12/08 20:26:47 by mwilsch          ###   ########.fr       */
+/*   Updated: 2022/12/10 17:40:17 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,14 @@ void	swap(t_list **tail, char c)
 	(*tail)->data = (*tail)->prev->data;
 	(*tail)->prev->data = store_data;
 	if (c == 'a')
-		printf("sa\n"); // change to ft_printf later
+		write(1, "sa\n", 3);
 	else
-		printf("sb\n");
+		write(1, "sb\n", 3);
 }
+
+// Switching bottom node data with top node data
+// Shifting up middle numbers
+// Second to bottom node
 
 /*			Rotate			
 Top element becomes the bottom one*/
@@ -33,55 +37,64 @@ void	rotate(t_list **tail, char c)
 	int			store_data;
 	int			store_sim;
 	t_list		*temp_ptr;
-	
+
 	store_data = (*tail)->next->data;
 	store_sim = (*tail)->next->sim_num;
 	temp_ptr = (*tail);
-	// Switching bottom node data with top node data
 	temp_ptr->next->data = (*tail)->data;
 	temp_ptr->next->sim_num = (*tail)->sim_num;
-	// Shifting up middle numbers
 	while (temp_ptr->prev != (*tail)->next)
 	{
 		temp_ptr->data = temp_ptr->prev->data;
 		temp_ptr->sim_num = temp_ptr->prev->sim_num;
 		temp_ptr = temp_ptr->prev;
 	}
-	// Second to bottom node
 	temp_ptr->data = store_data;
 	temp_ptr->sim_num = store_sim;
 	if (c == 'a')
-		printf("ra\n"); // change to ft_printf later
+		write(1, "ra\n", 3);
 	else
-		printf("rb\n");
+		write(1, "rb\n", 3);
 }
 
-/*			Reverse Rotate			
-The bottom element becomes the top element*/
+// For shifting down
+// To safeguard prev node data
+//The bottom element becomes the top element*/
+// Storing prev. node data
+// Shifting down element
+// Setting up element which needs to be shifted
+
+/*			Reverse Rotate			 */
 void	reverse_rotate(t_list **tail, char c)
 {
 	t_list	*temp_ptr;
-	int		store_data; // For shifting down
-	int		store_data2; // To safeguard prev node data
+	int		store_data;
+	int		store_data2;
 
-	temp_ptr = (*tail); // Copy of tail
+	temp_ptr = (*tail);
 	store_data = temp_ptr->prev->data;
 	temp_ptr->prev->data = temp_ptr->data;
 	temp_ptr = temp_ptr->prev;
 	while (temp_ptr->prev != (*tail))
 	{
-		store_data2 = temp_ptr->prev->data; // Storing prev. node data
-		temp_ptr->prev->data = store_data; // Shifting down element
-		store_data = store_data2; // Setting up element which needs to be shifted
-		temp_ptr = temp_ptr->prev; // Decrement ptr
+		store_data2 = temp_ptr->prev->data;
+		temp_ptr->prev->data = store_data;
+		store_data = store_data2;
+		temp_ptr = temp_ptr->prev;
 	}
 	temp_ptr->prev->data = store_data;
 	if (c == 'a')
-		printf("rra\n"); // change to ft_printf later
+		write(1, "rra\n", 4);
 	else
-		printf("rrb\n");
+		write(1, "rrb\n", 4);
 }
 
+// Pointing tail pointer from stack b to last node of stack a
+// Cut links
+// Second to top points to bottom
+// Bottom node points to the new lst
+// Self referencing the last node to it self
+// Update tail_take ptr
 /*			Push			*/
 void	split_top(t_list **tail_take, t_list **tail_put)
 {
@@ -90,15 +103,11 @@ void	split_top(t_list **tail_take, t_list **tail_put)
 
 	old_last = *tail_take;
 	new_last = (*tail_take)->prev;
-	// Pointing tail pointer from stack b to last node of stack a
 	*tail_put = old_last;
-	// Cut links
-	new_last->next = old_last->next; // Second to top points to bottom
-	old_last->next->prev = new_last; // Bottom node points to the new lst
-	// Self referencing the last node to it self
+	new_last->next = old_last->next;
+	old_last->next->prev = new_last;
 	old_last->prev = old_last;
 	old_last->next = old_last;
-	// Update tail_take ptr
 	(*tail_take) = new_last;
 }
 
@@ -123,13 +132,13 @@ void	add_to_put(t_list **stack_take, t_list **stack_put)
 
 void	push(t_list **stack_take, t_list **stack_put, char c)
 {
-	if (!(*stack_take)) // the stack to take from is empty
+	if (!(*stack_take))
 		return ;
 	if (c == 'a')
-		printf("pa\n"); // change to ft_printf later
+		write(1, "pa\n", 3);
 	else
-		printf("pb\n");
-	if (!(*stack_put)) // the stack to put to is empty
+		write(1, "pb\n", 3);
+	if (!(*stack_put))
 		return (split_top(stack_take, stack_put));
 	add_to_put(stack_take, stack_put);
 }

@@ -6,7 +6,7 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:00:14 by verdant           #+#    #+#             */
-/*   Updated: 2022/12/08 20:09:02 by mwilsch          ###   ########.fr       */
+/*   Updated: 2022/12/10 17:35:06 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void	sort5(t_list **stack_a, t_list **stack_b)
 	}
 }
 
-void	sort_upto_5(t_list **stack_a, t_list **stack_b)
+void	sort_upto_5(t_list **stack_a, t_list **stack_b, int size)
 {
-	if ((*stack_a)->size > 3)
+	if (size > 3)
 		sort5(stack_a, stack_b);
 	else
 		sort3(stack_a);

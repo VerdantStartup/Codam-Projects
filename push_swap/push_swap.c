@@ -6,37 +6,56 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:34:21 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/12/08 20:30:58 by mwilsch          ###   ########.fr       */
+/*   Updated: 2022/12/10 17:59:15 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-	// int i = 0;
-	// if (is_sorted(&stack_a))
-	// {
-	// 	while (i < stack_a->size)
-	// 	{
-	// 		// printf("num = %d\n", stack_a->data);
-	// 		stack_a = stack_a->prev;
-	// 		i++;
-	// 	}
-	// }
+void	print(t_list **tail)
+{
+	int size = lst_size(tail);
+	t_list *temp = (*tail);
+	for (int i = 0; i < size; i++)
+	{
+		printf("%p\n", temp);
+		temp = temp->prev;
+	}
+}
+
+void	leaks(void)
+{
+	system("leaks -q a.out");
+}
 
 int	main(int argc, char *argv[]) // Is it okay that my make fclean works even though I alr. cleaned?
 {
 	t_list	*stack_a;
 	t_list	*stack_b;
+	t_list *temp;
+	int		size;
 
 	stack_a = NULL;
 	stack_b = NULL;
+	size = argc - 1;
 	if (argc == 1 || !(ft_isdigit(argv, argc)) || !(check_dups(argv, argc)))
+	{
+		write(2,"Error\n", 6);
 		return (1);
+	}
 	create_list(&stack_a, argv, argc);
-	if (is_sorted(&stack_a))
+	if (is_sorted(&stack_a, size))
 		return (0);
-	if (argc < 5)
-		sort_upto_5(&stack_a, &stack_b);
+	if (size <= 5)
+		sort_upto_5(&stack_a, &stack_b, size);
 	else
-		sort_big(&stack_a, &stack_b);
+		sort_big(&stack_a, &stack_b, size);
+	while (size >= 0)
+	{
+		free(temp);
+		stack_a = stack_a->prev;
+		temp = stack_a;
+		size--;
+	}
+	// atexit(leaks);
 }

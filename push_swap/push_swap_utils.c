@@ -6,17 +6,17 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:18:42 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/12/08 20:05:31 by mwilsch          ###   ########.fr       */
+/*   Updated: 2022/12/10 17:34:43 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atoi(const char *str)
+long int	ft_atoi(const char *str)
 {
-	int	res;
-	int	i;
-	int	sign;
+	long int	res;
+	int			i;
+	int			sign;
 
 	res = 0;
 	i = 0;
@@ -38,15 +38,13 @@ int	ft_atoi(const char *str)
 	return (res * sign);
 }
 
-bool	is_sorted(t_list **stack_a)
+bool	is_sorted(t_list **stack_a, int size)
 {
 	t_list	*tail;
 	int		i;
-	int		size;
 
 	tail = (*stack_a);
 	i = 1;
-	size = tail->size;
 	while (i < size)
 	{
 		if (tail->data < tail->prev->data)

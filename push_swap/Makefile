@@ -12,7 +12,7 @@ OFILES = $(SRCS:%.c=%.o)
 
 INCLUDES = push_swap.h
 
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror
 
 C_RESET = "\033[0m"
 
