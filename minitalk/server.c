@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 13:34:20 by verdant           #+#    #+#             */
-/*   Updated: 2022/12/17 14:47:36 by verdant          ###   ########.fr       */
+/*   Updated: 2022/12/17 16:23:32 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,10 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 }
 
-void	handler(int signum)
+// the thing is I don't know if it's actually all store in the bits array
+// or not and just can't see because write is to slow
+
+void	handler(int signum) // Jetzt muss ich nur noch die bits zu einem char converten und ich bin done
 {
 	static int i;
 	static int bits[8];
@@ -98,12 +101,11 @@ void	handler(int signum)
 		write(1, "0", 1);
 		i++;
 	}
-	sleep(1);
-	// if (i == 8)
-	// {
-	// 	write(1, "test", 4);
-	// 	// exit(1);
-	// }
+	// // if (i == 8)
+	// // {
+	// // 	write(1, "test", 4);
+	// // 	// exit(1);
+	// // }
 
 }
 
@@ -125,7 +127,7 @@ int main(int argc, char *argv[])
 	{
 		signal(SIGUSR1, handler);
 		signal(SIGUSR2, handler);
-		sleep(1); 
+		pause (); 
 	}
 	// Implement infinite while loop 
 		// Implement decoder in infinite while loop

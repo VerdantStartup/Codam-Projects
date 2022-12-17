@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 13:45:01 by verdant           #+#    #+#             */
-/*   Updated: 2022/12/17 14:47:32 by verdant          ###   ########.fr       */
+/*   Updated: 2022/12/17 16:20:09 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	send_char(pid_t pid, char c)
 		else if (bits[i] == 0)
 			kill(pid, SIGUSR2);
 		printf("%d", bits[i]);
-		sleep(1); // Funktoniert mit sleep 1 aber ist langsam
+		usleep(200);
 	}
 }
 
