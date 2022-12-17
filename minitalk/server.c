@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 13:34:20 by verdant           #+#    #+#             */
-/*   Updated: 2022/12/17 13:49:20 by verdant          ###   ########.fr       */
+/*   Updated: 2022/12/17 14:47:36 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	handler(int signum)
 		write(1, "0", 1);
 		i++;
 	}
+	sleep(1);
 	// if (i == 8)
 	// {
 	// 	write(1, "test", 4);
@@ -120,11 +121,11 @@ int main(int argc, char *argv[])
 	ft_putnbr_fd(pid, 1);
 	ft_putchar_fd('\n', 1);
 
-	while(1)
+	while(argc == 1)
 	{
 		signal(SIGUSR1, handler);
 		signal(SIGUSR2, handler);
-		sleep(1);
+		sleep(1); 
 	}
 	// Implement infinite while loop 
 		// Implement decoder in infinite while loop

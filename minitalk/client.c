@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 13:45:01 by verdant           #+#    #+#             */
-/*   Updated: 2022/12/17 13:50:05 by verdant          ###   ########.fr       */
+/*   Updated: 2022/12/17 14:47:32 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,11 @@ void	send_char(pid_t pid, char c)
 	{
 		i--;
 		if (bits[i] == 1)
-			kill(pid, SIGUSR1); // How does kill(pid, SIGUSR1) know take the value of bit?
+			kill(pid, SIGUSR1); 
 		else if (bits[i] == 0)
 			kill(pid, SIGUSR2);
-		usleep(100);
+		printf("%d", bits[i]);
+		sleep(1); // Funktoniert mit sleep 1 aber ist langsam
 	}
 }
 
