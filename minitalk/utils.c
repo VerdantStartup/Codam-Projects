@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 11:33:10 by verdant           #+#    #+#             */
-/*   Updated: 2022/12/17 11:35:16 by verdant          ###   ########.fr       */
+/*   Updated: 2022/12/19 11:05:32 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,14 @@ int	ft_atoi(const char *str)
 	if (res == 0)
 		return (0);
 	return (res * sign);
+}
+
+int	ft_strlen(const char *str)
+{
+	size_t	x;
+
+	x = 0;
+	while (str[x])
+		x++;
+	return (x);
 }

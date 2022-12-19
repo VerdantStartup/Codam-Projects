@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 13:34:20 by verdant           #+#    #+#             */
-/*   Updated: 2022/12/17 16:23:32 by verdant          ###   ########.fr       */
+/*   Updated: 2022/12/19 11:03:14 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,52 +14,12 @@
 #include "minitalk.h"
 #include <limits.h>
 
-
-// void test(void)
-// {
-// 	char	c = 'a';
-// 	int		bits[CHAR_BIT];
-// 	int 	i = 0;
-
-// 	while (i != 8)
-// 	{
-// 		bits[i] = ((c >> i) & 1);
-// 		i++;
-// 	}
-// 	i = 0;
-// 	while (i != 8)
-// 	{
-		
-// 	}
-// }
-
-
-
-// void	handler(int signum)
-// {
-// 	static int i = 0;
-// 	static unsigned char c = 0;
-
-// 	c = c << 1;
-// 	c += signum;
-// 	if (++i == 8)
-// 	{
-// 		write (1, &c, 1);
-// 		i = 0;
-// 		c = 0;
-// 	}
-// 	// if (signum == SIGUSR1)
-// 	// 	c += signum;
-// 	// else
-// 	// 	c+= signum;
-// }
-
-void	ft_putchar_fd(char c, int fd)
+void	ft_putchar_fd(char c, int fd) // delete when I have ft_printf implemented
 {
 	write(fd, &c, 1);
 }
 
-void	ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd) // delete when I have ft_printf implemented
 {
 	if (n < 10 && n >= 0)
 		ft_putchar_fd(n + '0', fd);
@@ -77,38 +37,33 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 }
 
-// the thing is I don't know if it's actually all store in the bits array
-// or not and just can't see because write is to slow
+// void	handler(int signum) // Use this if I don't understand the other handler
+// {
+// 	static int i;
+// 	static int bits[8];
 
-void	handler(int signum) // Jetzt muss ich nur noch die bits zu einem char converten und ich bin done
+// 	if (signum == SIGUSR1)
+// 		bits[i++] = 1;
+// 	else if (signum == SIGUSR2)
+// 		bits[i++] = 0;
+// 	if (i == 8)
+// 		write(1, "test", 4);
+// }
+
+void	handler(int signum) // I don't understand c = c << 1 & c += signum == SIGUSR1
 {
-	static int i;
-	static int bits[8];
-	// unsigned char c;
+	static int	i;
+	static unsigned char	c;
 
-	i = 0;
-	// c = 0;
-
-	if (signum == SIGUSR1)
+	c = c << 1;
+	c += signum == SIGUSR1;
+	if (++i == 8)
 	{
-		bits[i] = 1;
-		write(1, "1", 1);
-		i++;
+		write(1, &c, 1);
+		i = 0;
+		c = 0;
 	}
-	else if (signum == SIGUSR2)
-	{
-		bits[i] = 0;
-		write(1, "0", 1);
-		i++;
-	}
-	// // if (i == 8)
-	// // {
-	// // 	write(1, "test", 4);
-	// // 	// exit(1);
-	// // }
-
 }
-
 
 int main(int argc, char *argv[])
 {
@@ -120,16 +75,12 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 	pid = getpid();
-	ft_putnbr_fd(pid, 1);
-	ft_putchar_fd('\n', 1);
-
+	ft_putnbr_fd(pid, 1); // exchange for ft_printf
+	ft_putchar_fd('\n', 1); // exchange for ft_printf
 	while(argc == 1)
 	{
 		signal(SIGUSR1, handler);
 		signal(SIGUSR2, handler);
 		pause (); 
 	}
-	// Implement infinite while loop 
-		// Implement decoder in infinite while loop
-	
 }
