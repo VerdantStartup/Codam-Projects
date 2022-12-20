@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 13:34:20 by verdant           #+#    #+#             */
-/*   Updated: 2022/12/19 11:03:14 by verdant          ###   ########.fr       */
+/*   Updated: 2022/12/20 12:40:44 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,16 @@ void	ft_putnbr_fd(int n, int fd) // delete when I have ft_printf implemented
 	}
 }
 
-// void	handler(int signum) // Use this if I don't understand the other handler
-// {
-// 	static int i;
-// 	static int bits[8];
-
-// 	if (signum == SIGUSR1)
-// 		bits[i++] = 1;
-// 	else if (signum == SIGUSR2)
-// 		bits[i++] = 0;
-// 	if (i == 8)
-// 		write(1, "test", 4);
-// }
-
 void	handler(int signum) // I don't understand c = c << 1 & c += signum == SIGUSR1
 {
 	static int	i;
 	static unsigned char	c;
 
 	c = c << 1;
-	c += signum == SIGUSR1;
+	if (signum == SIGUSR1)
+		c += 1;
+	else if (signum == SIGUSR2)
+		c += 0;
 	if (++i == 8)
 	{
 		write(1, &c, 1);
@@ -69,6 +59,7 @@ int main(int argc, char *argv[])
 {
 	int pid; 
 	
+	argv[0] = NULL;
 	if (argc > 1)
 	{
 		printf("Wrong input\tTry the following: <./server>"); // Use ft_printf later

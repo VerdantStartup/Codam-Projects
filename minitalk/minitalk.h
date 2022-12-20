@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 13:36:33 by verdant           #+#    #+#             */
-/*   Updated: 2022/12/19 11:10:06 by verdant          ###   ########.fr       */
+/*   Updated: 2022/12/20 12:58:57 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,8 @@
 #include <stdlib.h>
 #include <stdio.h> // Delete when finished
 
-int	ft_atoi(const char *str);
-int	ft_strlen(const char *str);
+int	ft_atoi(const char *str); // I can delete this as soon as my makefile compiles my libft as well
+int	ft_strlen(const char *str); // I can delete this as soon as my makefile compiles my libft as well
 
-// Finished main logic but I have have to double check the
-// The subject and do some stress-tests
-// I also still do not understand the handler I copied from stackoverflow
-// I also still have to include libft and prinft
-// To do that I need a makefile in the first place
+// I need to fix my Makefile double main issue
+// I need my Makefile from libft to compile printf as well
