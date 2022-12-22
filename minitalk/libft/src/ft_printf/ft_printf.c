@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 16:50:42 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/10/25 20:47:38 by mwilsch          ###   ########.fr       */
+/*   Updated: 2022/12/22 13:17:01 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
-#include <limits.h>
+#include "libft.h"
 
-static size_t	ft_putchar_fd(char c, int fd)
+static size_t	ft_putchar(int c)
 {
-	write(fd, &c, 1);
+	write(1, &c, 1);
 	return (1);
 }
 
@@ -26,9 +25,9 @@ static int	format_conversion(char c, va_list args)
 
 	print_len = 0;
 	if (c == 'c')
-		print_len += ft_putchar_fd(va_arg(args, int), STDOUT_FILENO);
+		print_len += ft_putchar(va_arg(args, int));
 	else if (c == 's')
-		print_len += ft_putstr_fd(va_arg(args, char *), STDOUT_FILENO);
+		print_len += ft_putstr(va_arg(args, char *));
 	else if (c == 'd' || c == 'i')
 		print_len += ft_putnbr(va_arg(args, int));
 	else if (c == 'x' || c == 'X')

@@ -29,7 +29,7 @@ FT_TO_DIR			=	ft_to/
 FT_TO					=	ft_atoi ft_itoa ft_tolower ft_toupper
 
 FT_STR_DIR		=	ft_str/
-FT_STR				=	ft_split ft_strchr ft_strdup ft_striteri ft_strjoin\
+FT_STR				=	ft_split ft_strchr ft_strclen ft_strdup ft_striteri ft_strjoin\
 								ft_strlcat ft_strlcpy ft_strlen ft_strmapi ft_strncmp\
 								ft_strnstr ft_strrchr ft_strtrim ft_substr
 

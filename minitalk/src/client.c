@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 13:45:01 by verdant           #+#    #+#             */
-/*   Updated: 2022/12/19 11:05:21 by verdant          ###   ########.fr       */
+/*   Updated: 2022/12/21 16:11:39 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char *argv[])
 	i = 0;
 	if (argc < 3)
 	{
-		printf("Wrong input\tTry the following: ./client <pid> <input string>"); // Change to ft_printf later
+		ft_printf("Wrong input\tTry the following: ./client <pid> <input string>"); // Change to ft_printf later
 		exit(1);
 	}
 	pid = ft_atoi(argv[1]);

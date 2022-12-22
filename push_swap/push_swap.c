@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:34:21 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/12/10 17:59:15 by mwilsch          ###   ########.fr       */
+/*   Updated: 2022/12/10 18:05:43 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 void	print(t_list **tail)
 {
@@ -50,12 +51,13 @@ int	main(int argc, char *argv[]) // Is it okay that my make fclean works even th
 		sort_upto_5(&stack_a, &stack_b, size);
 	else
 		sort_big(&stack_a, &stack_b, size);
-	while (size >= 0)
+		
+	while (size > 0)
 	{
-		free(temp);
-		stack_a = stack_a->prev;
 		temp = stack_a;
+		stack_a = stack_a->prev;
+		free(temp);
 		size--;
 	}
-	// atexit(leaks);
+	atexit(leaks);
 }
