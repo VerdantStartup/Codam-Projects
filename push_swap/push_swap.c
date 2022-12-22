@@ -6,9 +6,26 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:34:21 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/12/10 18:05:43 by verdant          ###   ########.fr       */
+/*   Updated: 2022/12/22 14:18:07 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/// !!!!!!!!
+
+
+// This is not the version I handed in or in other words
+// this is not the newst version. the newst version is 
+// saved locally in Codam. I have to add it to my Github
+// When I'm back in Amsterddam
+
+
+
+/// !!!!!!!!
+
+
+
+
+
 
 #include "push_swap.h"
 #include <stdio.h>
