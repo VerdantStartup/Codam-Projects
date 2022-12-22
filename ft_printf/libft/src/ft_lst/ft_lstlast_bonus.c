@@ -1,36 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils2.c                                 :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 19:34:29 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/10/25 13:21:36 by mwilsch          ###   ########.fr       */
+/*   Created: 2022/10/19 19:49:46 by mwilsch           #+#    #+#             */
+/*   Updated: 2022/10/21 14:10:34 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-size_t	ft_strclen(const char *s, char c)
+t_list	*ft_lstlast(t_list *lst)
 {
-	size_t	i;
-
-	i = 0;
-	while (*s != c && *s != 0)
-	{
-		i++;
-		s++;
-	}
-	return (i);
-}
-
-size_t	ft_strlen(char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	while (lst && lst->next != NULL)
+		lst = lst->next;
+	return (lst);
 }

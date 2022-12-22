@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 16:50:42 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/10/25 20:47:38 by mwilsch          ###   ########.fr       */
+/*   Updated: 2022/12/21 16:11:17 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	format_conversion(char c, va_list args)
 	if (c == 'c')
 		print_len += ft_putchar_fd(va_arg(args, int), STDOUT_FILENO);
 	else if (c == 's')
-		print_len += ft_putstr_fd(va_arg(args, char *), STDOUT_FILENO);
+		print_len += ft_putstr(va_arg(args, char *));
 	else if (c == 'd' || c == 'i')
 		print_len += ft_putnbr(va_arg(args, int));
 	else if (c == 'x' || c == 'X')

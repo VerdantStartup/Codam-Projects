@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:50:59 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/10/25 15:58:03 by mwilsch          ###   ########.fr       */
+/*   Updated: 2022/12/21 16:10:33 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_putstr_fd(char *s, int fd)
+size_t	ft_putstr(char *s)
 {
 	size_t	word_len;
 
 	word_len = 0;
 	if (!s)
-		return (word_len += write(fd, "(null)", 6));
+		return (word_len += write(1, "(null)", 6));
 	word_len = ft_strlen(s);
-	write(fd, s, word_len);
+	write(1, s, word_len);
 	return (word_len);
 }
 
