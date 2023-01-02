@@ -1,0 +1,81 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: verdant <verdant@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/12/25 11:35:04 by verdant           #+#    #+#              #
+#    Updated: 2022/12/28 14:50:45 by verdant          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+## Marcos ##
+NAME			=	wireframe
+LIBFT			=	libft_with_all
+SRC_DIR		=	src/
+OBJ_DIR		=	obj/
+CC				=	gcc
+CFLAGS		=	-Wunreachable-code -I include
+HEADERS		=	-I $(LIBMLX)/include -I /System/Volumes/Data/opt/homebrew/Cellar/glfw/3.3.8/include
+LIBMLX		=	./lib/MLX42
+LIBS	:= $(LIBMLX)/libmlx42.a -ldl -lglfw -L /opt/homebrew/Cellar/glfw/3.3.8/lib/ -pthread -lm
+RM				=	rm -rf
+
+## Colors ##
+
+Reset			=	\033[0m
+Black			=	\033[30m
+Red				=	\033[31m
+Green			=	\033[32m
+Yellow		=	\033[33m
+Blue			=	\033[34m
+Magenta		=	\033[35m
+Cyan			=	\033[36m
+White			=	\033[37m
+
+## Files ##
+
+SRC_FILES	=	fdf_error fdf_parse fdf_draw fdf
+
+SRC				=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
+OBJ				=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+
+OBJF			=	Idk why, but without this it doesen't work!
+
+start:
+	@make -C $(LIBMLX)
+	@echo "$(Green)MLX42 complied$(Reset)"
+	@make -C $(LIBFT)
+	@echo "$(Green)Libft complied$(Reset)"
+	@cp $(LIBFT)/libft.a .
+	@make all
+
+all:	$(NAME)
+
+$(NAME):	$(OBJ) $(OBJF)
+			@$(CC) $(CLFAGS) $(OBJ) $(LIBS) $(HEADERS) libft.a -o $(NAME)
+			@echo "$(Magenta)Wireframe complied$(Reset)"
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(OBJF)
+			@$(CC) $(CFLAGS) -c $< $(HEADERS) -o $@
+
+$(OBJF):
+			@mkdir -p $(OBJ_DIR)
+
+clean:
+	@rm -rf $(OBJ_DIR)
+	@make clean -C $(LIBFT)
+	@make clean -C $(LIBMLX)
+
+fclean: clean
+	@$(RM) $(NAME)
+	@$(RM) $(LIBFT)/libft.a
+	@$(RM) libft.a
+	@find . -name ".DS_Store" -delete
+	@echo "$(Red)All libs cleaned$(Reset)"
+
+re: fclean start
+	@echo "$(Yellow)Recomplied everything$(Reset)"
+
+.PHONY:	start all clean fclean re

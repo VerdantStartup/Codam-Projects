@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 13:36:33 by verdant           #+#    #+#             */
-/*   Updated: 2022/12/26 22:12:38 by verdant          ###   ########.fr       */
+/*   Created: 2022/10/05 20:20:46 by mwilsch           #+#    #+#             */
+/*   Updated: 2022/10/11 19:55:58 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-#include "../libft/include/libft.h"
-#include "../libft/include/ft_printf.h"
-// #include "../libft/include/get_next_line.h"
-#include <signal.h>
+int	ft_isprint(int c)
+{
+	if (c > 31 && c < 127)
+		return (1);
+	else
+		return (0);
+}
 
-#endif
+// int main()
+// {
+// 	int c = '3';
+// 	printf("%d", ft_isprint(c));
+// }

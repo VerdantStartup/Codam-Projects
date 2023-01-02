@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 13:36:33 by verdant           #+#    #+#             */
-/*   Updated: 2022/12/26 22:12:38 by verdant          ###   ########.fr       */
+/*   Created: 2022/10/19 18:49:10 by mwilsch           #+#    #+#             */
+/*   Updated: 2022/10/21 13:07:59 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-#include "../libft/include/libft.h"
-#include "../libft/include/ft_printf.h"
-// #include "../libft/include/get_next_line.h"
-#include <signal.h>
+int	ft_lstsize(t_list *lst)
+{
+	size_t	n;
 
-#endif
+	n = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		n++;
+	}
+	return (n);
+}

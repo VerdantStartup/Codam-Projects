@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:34:21 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/12/22 14:18:07 by verdant          ###   ########.fr       */
+/*   Updated: 2022/12/26 22:15:58 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	print(t_list **tail)
 	t_list *temp = (*tail);
 	for (int i = 0; i < size; i++)
 	{
-		printf("%p\n", temp);
+		printf("%d\n", temp->data);
 		temp = temp->prev;
 	}
 }
@@ -68,7 +68,7 @@ int	main(int argc, char *argv[]) // Is it okay that my make fclean works even th
 		sort_upto_5(&stack_a, &stack_b, size);
 	else
 		sort_big(&stack_a, &stack_b, size);
-		
+	print(&stack_a);
 	while (size > 0)
 	{
 		temp = stack_a;
@@ -76,5 +76,4 @@ int	main(int argc, char *argv[]) // Is it okay that my make fclean works even th
 		free(temp);
 		size--;
 	}
-	atexit(leaks);
 }
