@@ -30,22 +30,22 @@ C_GREEN = "\033[92m"
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(OBJF)
+$(NAME): $(OBJ)
 	@ $(CC) $(CFLAGS) $(INCLUDE) $(OBJ) -o $(NAME)
 	@echo $(C_GREEN)"Push_swap compilied"$(C_RESET)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(OBJF)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
 	@$(CC) $(CFLAGS) -c $< $(INCLUDE) -o $@
 
 $(OBJF):
-	@mkdir -p $(dir $@)
+	@mkdir -p $(OBJ_DIR)
 
 fclean: clean
 	@$(RM) $(NAME)
 	@$(RM) -r $(OBJ_DIR)
 	@echo "$(Red)All libs cleaned$(Reset)"
 
-re: fclean start
+re: fclean all
 	@echo "$(Yellow)Recomplied everything$(Reset)"
 
 .PHONY: all clean fclean re
