@@ -6,7 +6,7 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:00:14 by verdant           #+#    #+#             */
-/*   Updated: 2023/01/03 17:20:57 by mwilsch          ###   ########.fr       */
+/*   Updated: 2023/01/03 19:12:41 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,11 @@ void	sort5(t_list **stack_a, t_list **stack_b, int size)
 		small_to_b(stack_a, stack_b, small);
 }
 
+
+// This version accounts for list size 4 or 5 unlike the other one which always
+// Just switches the 2 numberes to sort 5 and 2 to pa
+// I guess it still works but let's see...
+
 void	sort_upto_5(t_list **stack_a, t_list **stack_b, int size)
 {
 	int	i;
@@ -97,13 +102,13 @@ void	sort_upto_5(t_list **stack_a, t_list **stack_b, int size)
 	i = 0;
 	if (size > 3)
 	{
-		while (i < 2)
+		while (lst_size(stack_a) > 3)
 		{
 			sort5(stack_a, stack_b, size);
 			i++;
 		}
 		sort3(stack_a, lst_size(stack_a));
-		while (i < 4)
+		while (lst_size(stack_a) <= size - 1)
 		{
 			push(stack_b, stack_a, 'a');
 			i++;

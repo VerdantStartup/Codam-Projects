@@ -6,7 +6,7 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:34:21 by mwilsch           #+#    #+#             */
-/*   Updated: 2023/01/03 17:06:55 by mwilsch          ###   ########.fr       */
+/*   Updated: 2023/01/03 19:06:26 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@
 // }
 
 #include <stdio.h>
-// void	print(t_list **tail)
-// {
-// 	int size = lst_size(tail);
-// 	t_list *temp = (*tail);
-// 	for (int i = 0; i < size; i++)
-// 	{
-// 		printf("%d\t", temp->data);
-// 		temp = temp->prev;
-// 	}
-// 	printf("\n");
-// }
+void	print(t_list **tail)
+{
+	int size = lst_size(tail);
+	t_list *temp = (*tail);
+	for (int i = 0; i < size; i++)
+	{
+		printf("%d\t", temp->data);
+		temp = temp->prev;
+	}
+	printf("\n");
+}
 
 /*			Swap			*/
 void	swap(t_list **tail, char c)
