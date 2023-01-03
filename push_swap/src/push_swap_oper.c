@@ -6,25 +6,11 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 20:23:58 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/12/10 17:40:17 by mwilsch          ###   ########.fr       */
+/*   Updated: 2022/12/10 18:12:17 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-/*			Swap			*/
-void	swap(t_list **tail, char c)
-{
-	int				store_data;
-
-	store_data = (*tail)->data;
-	(*tail)->data = (*tail)->prev->data;
-	(*tail)->prev->data = store_data;
-	if (c == 'a')
-		write(1, "sa\n", 3);
-	else
-		write(1, "sb\n", 3);
-}
 
 // Switching bottom node data with top node data
 // Shifting up middle numbers

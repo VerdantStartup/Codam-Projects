@@ -3,54 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 15:34:21 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/12/26 22:15:58 by verdant          ###   ########.fr       */
+/*   Updated: 2023/01/03 17:06:55 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/// !!!!!!!!
-
-
-// This is not the version I handed in or in other words
-// this is not the newst version. the newst version is 
-// saved locally in Codam. I have to add it to my Github
-// When I'm back in Amsterddam
-
-
-
-/// !!!!!!!!
-
-
-
-
-
-
 #include "push_swap.h"
-#include <stdio.h>
 
-void	print(t_list **tail)
+// void	leaks(void)
+// {
+// 	system("leaks -q a.out");
+// }
+
+#include <stdio.h>
+// void	print(t_list **tail)
+// {
+// 	int size = lst_size(tail);
+// 	t_list *temp = (*tail);
+// 	for (int i = 0; i < size; i++)
+// 	{
+// 		printf("%d\t", temp->data);
+// 		temp = temp->prev;
+// 	}
+// 	printf("\n");
+// }
+
+/*			Swap			*/
+void	swap(t_list **tail, char c)
 {
-	int size = lst_size(tail);
-	t_list *temp = (*tail);
-	for (int i = 0; i < size; i++)
+	int				store_data;
+
+	store_data = (*tail)->data;
+	(*tail)->data = (*tail)->prev->data;
+	(*tail)->prev->data = store_data;
+	if (c == 'a')
+		write(1, "sa\n", 3);
+	else
+		write(1, "sb\n", 3);
+}
+
+void	free_list(t_list **stack_a, int size)
+{
+	t_list	*temp;
+
+	temp = (*stack_a);
+	while (size > 0)
 	{
-		printf("%d\n", temp->data);
-		temp = temp->prev;
+		temp = *stack_a;
+		*stack_a = (*stack_a)->prev;
+		free(temp);
+		size--;
 	}
 }
 
-void	leaks(void)
-{
-	system("leaks -q a.out");
-}
-
-int	main(int argc, char *argv[]) // Is it okay that my make fclean works even though I alr. cleaned?
+int	main(int argc, char *argv[])
 {
 	t_list	*stack_a;
 	t_list	*stack_b;
-	t_list *temp;
 	int		size;
 
 	stack_a = NULL;
@@ -58,7 +69,7 @@ int	main(int argc, char *argv[]) // Is it okay that my make fclean works even th
 	size = argc - 1;
 	if (argc == 1 || !(ft_isdigit(argv, argc)) || !(check_dups(argv, argc)))
 	{
-		write(2,"Error\n", 6);
+		write(2, "Error\n", 6);
 		return (1);
 	}
 	create_list(&stack_a, argv, argc);
@@ -68,12 +79,5 @@ int	main(int argc, char *argv[]) // Is it okay that my make fclean works even th
 		sort_upto_5(&stack_a, &stack_b, size);
 	else
 		sort_big(&stack_a, &stack_b, size);
-	print(&stack_a);
-	while (size > 0)
-	{
-		temp = stack_a;
-		stack_a = stack_a->prev;
-		free(temp);
-		size--;
-	}
+	free_list(&stack_a, size);
 }

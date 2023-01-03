@@ -6,20 +6,24 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:00:14 by verdant           #+#    #+#             */
-/*   Updated: 2022/12/10 17:35:06 by mwilsch          ###   ########.fr       */
+/*   Updated: 2023/01/03 17:20:57 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <limits.h>
+#include <stdio.h>
 
 // Order in sort3 --> C3 -> C2 -> C1 | else --> C4 -> C%
 
-void	sort3(t_list **tail)
+void	sort3(t_list **tail, int size)
 {
 	const int	top = (*tail)->data;
 	const int	mid = (*tail)->prev->data;
 	const int	bot = (*tail)->next->data;
 
+	if (is_sorted(tail, size) == true)
+		return ;
 	if (top > mid)
 	{
 		if (top > bot && mid < bot)
@@ -38,28 +42,73 @@ void	sort3(t_list **tail)
 	}
 }
 
-void	sort5(t_list **stack_a, t_list **stack_b)
+void	small_to_b(t_list **stack_a, t_list **stack_b, int small)
 {
-	int	i;
+	int		i;
+	t_list	*temp;
 
 	i = 0;
-	while (i++ < 2)
-		push(stack_a, stack_b, 'a');
-	sort3(stack_a);
-	if ((*stack_b)->data > (*stack_b)->prev->data)
-		swap(stack_b, 'b');
-	while (i < 5)
+	temp = (*stack_a);
+	while (small != temp->data)
 	{
-		push(stack_b, stack_a, 'b');
-		rotate(stack_a, 'a');
+		temp = temp->prev;
 		i++;
 	}
+	if (i < 3)
+	{
+		while ((*stack_a)->data != small)
+			rotate(stack_a, 'a');
+		push(stack_a, stack_b, 'b');
+	}
+	else
+	{
+		while ((*stack_a)->data != small)
+			reverse_rotate(stack_a, 'a');
+		push(stack_a, stack_b, 'b');
+	}
+}
+
+void	sort5(t_list **stack_a, t_list **stack_b, int size)
+{
+	int		cnt;
+	int		small;
+	t_list	*temp;
+
+	cnt = 0;
+	small = INT_MAX;
+	temp = (*stack_a);
+	while (cnt < lst_size(stack_a))
+	{
+		if ((*stack_a)->data < small)
+			small = (*stack_a)->data;
+		*stack_a = (*stack_a)->prev;
+		cnt++;
+	}
+	if ((*stack_a)->data == small)
+		push(stack_a, stack_b, 'b');
+	else
+		small_to_b(stack_a, stack_b, small);
 }
 
 void	sort_upto_5(t_list **stack_a, t_list **stack_b, int size)
 {
+	int	i;
+
+	i = 0;
 	if (size > 3)
-		sort5(stack_a, stack_b);
+	{
+		while (i < 2)
+		{
+			sort5(stack_a, stack_b, size);
+			i++;
+		}
+		sort3(stack_a, lst_size(stack_a));
+		while (i < 4)
+		{
+			push(stack_b, stack_a, 'a');
+			i++;
+		}
+	}
 	else
-		sort3(stack_a);
+		sort3(stack_a, size);
 }
