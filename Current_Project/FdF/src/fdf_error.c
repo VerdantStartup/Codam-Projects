@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 09:12:23 by verdant           #+#    #+#             */
-/*   Updated: 2022/12/28 12:14:27 by verdant          ###   ########.fr       */
+/*   Updated: 2023/01/02 19:08:53 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	ft_error(char *msg)
 {
-	printf("%s", msg);
+	// printf("%s", msg);
 	exit(1);
 }

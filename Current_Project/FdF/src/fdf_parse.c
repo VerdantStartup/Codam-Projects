@@ -6,42 +6,64 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 11:20:36 by verdant           #+#    #+#             */
-/*   Updated: 2023/01/02 15:07:08 by verdant          ###   ########.fr       */
+/*   Updated: 2023/01/02 20:44:02 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-int	get_max_points(const char *filename)
+// static size_t	count_words(char *str, char c)
+// {
+// 	size_t	counter;
+// 	int		reset;
+
+// 	counter = 0;
+// 	reset = 1;
+// 	while (*str)
+// 	{
+// 		if (*str != c && reset)
+// 		{
+// 			counter++;
+// 			reset = 0;
+// 		}
+// 		else if (*str == c)
+// 			reset = 1;
+// 		str++;
+// 	}
+// 	return (counter);
+// }
+
+// implement that the lost space in the first line doesnt get counted
+int	get_max_points(const char *filename, t_data **data)
 {
 	char	*y_line;
 	char	**x_line;
 	int		y_cnt;
 	int		x_cnt;
 	const	int fd = open(filename, O_RDONLY);
+	y_cnt = 0;
+	x_cnt = 0;
 
 	y_line = get_next_line(fd);
-	y_cnt = 0;
+	x_line = ft_split(y_line, ' ');
+	while (x_line[x_cnt])
+		x_cnt++;
 	while (y_line)
 	{
 		if (y_cnt == 0)
-		{
-			x_cnt = 0;
-			x_line = ft_split(y_line, ' ');
-			while (x_line[x_cnt] != NULL)
-				x_cnt++;
-		}
 		free(y_line);
 		y_line = get_next_line(fd);
 		y_cnt++;
 	}
+	(*data)->max_pts_x = x_cnt;
+	(*data)->max_pts_y = y_cnt;
 	close(fd);
 	return (free(y_line), x_cnt * y_cnt);
 }
 
 t_point *read_values(t_point *points, char *y_line, int y, t_data **data)
 {
-	char	**x_line = ft_split(y_line, ' ');
+	char				**x_line = ft_split(y_line, ' ');
 	int					x;
 	static int	num_points;
 
@@ -51,7 +73,7 @@ t_point *read_values(t_point *points, char *y_line, int y, t_data **data)
 		points[num_points].x = x;
 		points[num_points].y = y;
 		points[num_points].z = ft_atoi(x_line[y]);
-		points[num_points].color = false;
+		points[num_points].is_last = false;
 		num_points++;
 		x++;
 		(*data)->line_max = x;
@@ -60,13 +82,13 @@ t_point *read_values(t_point *points, char *y_line, int y, t_data **data)
 	return (points);
 }
 
-t_point	*parse_map(const char *filename, t_point *pts, int max_pts, t_data **data)
+t_point	*parse_map(const char *filename, t_point *pts, t_data **data)
 {
-	const	int	fd					=	open(filename, O_RDONLY);
+	const	int	fd		=	open(filename, O_RDONLY);
 	char			*y_line;
 	int				y;
 	
-	pts = malloc(sizeof(t_point) * max_pts - 1);
+	pts = malloc(sizeof(t_point) * (*data)->max_pts - 1);
 	y = 0;
 	y_line = get_next_line(fd);
 	while (y_line)

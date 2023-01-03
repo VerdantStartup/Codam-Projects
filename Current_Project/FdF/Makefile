@@ -6,7 +6,7 @@
 #    By: verdant <verdant@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/25 11:35:04 by verdant           #+#    #+#              #
-#    Updated: 2022/12/28 14:50:45 by verdant          ###   ########.fr        #
+#    Updated: 2023/01/02 19:12:39 by verdant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIBFT			=	libft_with_all
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
 CC				=	gcc
-CFLAGS		=	-Wunreachable-code -I include
+CFLAGS		=	 -I include
 HEADERS		=	-I $(LIBMLX)/include -I /System/Volumes/Data/opt/homebrew/Cellar/glfw/3.3.8/include
 LIBMLX		=	./lib/MLX42
 LIBS	:= $(LIBMLX)/libmlx42.a -ldl -lglfw -L /opt/homebrew/Cellar/glfw/3.3.8/lib/ -pthread -lm

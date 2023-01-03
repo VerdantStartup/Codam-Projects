@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 09:08:04 by verdant           #+#    #+#             */
-/*   Updated: 2023/01/02 15:06:38 by verdant          ###   ########.fr       */
+/*   Updated: 2023/01/02 22:38:57 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct point
 {
 	float		x;
 	float		y;
-	int		z;
+	float			z;
 	bool		is_last;
 	int			color; // Implemented after mandatory part
 } t_point;
@@ -42,6 +42,8 @@ typedef struct data
 	int line_max;
 	int	max_pts;
 	double	angle;
+	int max_pts_x;
+	int max_pts_y;
 } t_data;
 
 
@@ -49,10 +51,10 @@ typedef struct data
 void		ft_error(char *msg);
 
 /*			Parsing			*/
-t_point	*parse_map(const char *filename, t_point *pts, int max_pts, t_data **data);
-int			get_max_points(const char *filename);
+t_point	*parse_map(const char *filename, t_point *pts, t_data **data);
+int			get_max_points(const char *filename, t_data **data);
 
 /*			Drawing			*/
-void		create_projection(t_point *pts, int max_pts, t_data **data);
+void		create_projection(t_point *pts, t_data **data);
 
 #endif
