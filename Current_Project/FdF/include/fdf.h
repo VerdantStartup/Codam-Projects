@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 09:08:04 by verdant           #+#    #+#             */
-/*   Updated: 2023/01/02 22:38:57 by verdant          ###   ########.fr       */
+/*   Updated: 2023/01/04 21:16:42 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,20 @@
 typedef struct point
 {
 	float		x;
+	float		x_iso;
 	float		y;
-	float			z;
-	bool		is_last;
+	float		y_iso;
+	float		z;
 	int			color; // Implemented after mandatory part
 } t_point;
 
 typedef struct data
 {
-	int line_max;
-	int	max_pts;
+	int		max_pts;
 	double	angle;
-	int max_pts_x;
-	int max_pts_y;
+	int		zoom;
+	int		x_Offset;
+	int		y_Offset;
 } t_data;
 
 

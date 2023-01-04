@@ -3,38 +3,97 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_draw.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 11:50:25 by verdant           #+#    #+#             */
-/*   Updated: 2023/01/02 22:34:38 by verdant          ###   ########.fr       */
+/*   Updated: 2023/01/04 21:21:34 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 #include <math.h>
 
-
-void	draw_line(int x0, int y0, int x1, int y1, mlx_image_t *img, t_data **data)
+t_point	*cvt_iso(t_point *pts, t_data **data)
 {
-	
-	int addon_x;
-	int addon_y;
+	int	cnt;
+	t_data *temp;
+	int	x_prev;
+	int	y_prev;
 
-	
-	addon_x = (1440 - 100) / ((*data)->max_pts_x - 1);
-	addon_y = (900 - 100) / ((*data)->max_pts_y - 1);
+	cnt = 0;
+	temp = (*data);
+	while (cnt < temp->max_pts)
+	{
+		x_prev = pts[cnt].x * (temp->zoom);
+		y_prev = pts[cnt].y * (temp->zoom);
+		// Transform x & y value to 2D isometric values
+		pts[cnt].x_iso = (x_prev - y_prev) * cos(temp->angle);
+		pts[cnt].y_iso = -(pts[cnt].z) + (x_prev - y_prev) * sin(temp->angle);
+		pts[cnt].x_iso += 1000;
+		pts[cnt].y_iso += 1000;
+		cnt++;
+	}
+	return (pts);
+}
 
-	// printf("x0 %d x1 %d\t", x0, x1);
+
+// My new draw_line function
+void	draw_line(int x1, int y1, int x2, int y2, mlx_image_t *img)
+{
+	int			temp;
 	
-	// x0 *= addon_x;
-	// x1 *= addon_x;
-	// y0 *= addon_y;
-	// y1 *= addon_y;
-	x0 *= 50;
-	x1 *= 50;
-	y0 *= 50;
-	y1 *= 50;
+	float		m;
+	float		x, y;
 	
+	const int	dx = x2 - x1;
+	const int	dy = y2 - y1;
+	
+	if (abs(dx) > abs(dy))
+	{
+		x = (int)x;
+		if (x1 > x2)
+		{
+			temp = x1;
+			x1 = x2;
+			x2 = temp;
+			temp = y1;
+			y1 = y2;
+			y2 = temp;
+		}
+		m = (float)dy / (float)dx;
+		y = y1;
+		for (x = x1; (int)x <= x2; x++)
+		{
+			mlx_put_pixel(img, x, round(y), 255);
+			y += m;
+		}
+	}
+	else
+	{
+		y = (int)y;
+		if (y1 > y2)
+		{
+			temp = x1;
+			x1 = x2;
+			x2 = temp;
+			temp = y1;
+			y1 = y2;
+			y2 = temp;
+		}
+		m = (float)dx / (float)dy;
+		x = x1;
+		for (y = y1; y <= y2; y++)
+		{
+			mlx_put_pixel(img, round(x), y, 255);
+			x += m;
+		}
+	}
+}
+
+// My old draw_line function
+void	draw_line(int x0, int y0, int x1, int y1, mlx_image_t *img)
+{
+
 	int	dx = x1 - x0;
 	int	dy = y1 - y0;
 	int	x_step;
@@ -67,57 +126,36 @@ void	draw_line(int x0, int y0, int x1, int y1, mlx_image_t *img, t_data **data)
 			current_y += y_step;
 			error += dx;
 		}
-		mlx_put_pixel(img, current_x + 200, current_y + 200, 0);
+		mlx_put_pixel(img, current_x, current_y, 255);
 	}
 }
-
-t_point	*isometric(t_point *pts, t_data **data)
-{
-    int x;
-    int y;
-		int z;
-		int cnt;
-
-   
-		cnt = 0;
-		while (cnt <= (*data)->max_pts)
-		{
-			x = pts[cnt].x;
-   		y = pts[cnt].y;
-			z = pts[cnt].z;
-			// printf("At cnt: |%d|\tx_iso: |%f|\ty_iso: |%f|\n", cnt,pts[cnt].x, pts[cnt].y);
-			pts[cnt].x = x - y;
-			pts[cnt].y = (x + y) / 2 - z;
-			printf("At cnt: |%d|\tx_iso: |%f|\ty_iso: |%f|\n", cnt,pts[cnt].x, pts[cnt].y);
-			cnt++;
-		}
-		return (pts);
-}
-
 
 void create_projection(t_point *pts, t_data **data)
 {
-	int x, y, x1, y1, i, ends;
-
-	ends = (*data)->line_max;
+	int	i;
+	
 	i = 0;
-	mlx_t	*mlx = mlx_init(2560, 1600, "Test", true);
+
+// Intilaised MLX and Image | (Copy over to set data later)
+	mlx_t *mlx = mlx_init(2000, 1500, "Test", true);
 	if (!mlx)
-		ft_error("mlx ptr broken");
-	mlx_image_t *img = mlx_new_image(mlx, 1440, 900);
+		ft_error("mlx ptr failed");
+	mlx_image_t *img = mlx_new_image(mlx, 2000, 1500);
 	if (!img)
-		ft_error("img ptr broken");
+		ft_error("Img ptr failed");
 	memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
 	mlx_image_to_window(mlx, img, 0, 0);
-	pts = isometric(pts, data);
-	while (i <= (*data)->max_pts)
-	{
-		if (pts[i].x > 0)
-		draw_line(pts[i].x - 1, pts[i].y, pts[i].x, pts[i].y, img, data);
-	 if (pts[i].y > 0)
-		 draw_line(pts[i].x, pts[i].y - 1, pts[i].x, pts[i].y, img, data);
-		i++;
-	}
+
+	
+// Isometric Projection
+	pts = cvt_iso(pts, data);
+	
+
+
+// Drawing the line
+	// ???
+
+// Loop & Cleaning
 	mlx_loop(mlx);
 	mlx_delete_image(mlx, img);
 	mlx_terminate(mlx);

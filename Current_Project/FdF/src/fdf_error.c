@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 09:12:23 by verdant           #+#    #+#             */
-/*   Updated: 2023/01/02 19:08:53 by verdant          ###   ########.fr       */
+/*   Updated: 2023/01/04 21:16:28 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	ft_error(char *msg)
 {
-	// printf("%s", msg);
+	printf("%s", msg);
 	exit(1);
 }
