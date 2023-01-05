@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
+/*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 08:51:07 by verdant           #+#    #+#             */
-/*   Updated: 2023/01/04 21:17:58 by mwilsch          ###   ########.fr       */
+/*   Updated: 2023/01/05 17:46:05 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void	set_data(t_data **data, const char *filename)
 {
 	(*data)->angle = 30 * (M_PI / 180);
 	(*data)->max_pts = (get_max_points(filename, data) - 1);
-	(*data)->zoom = 30;
-	(*data)->x_Offset = 2000 / 2;
-	(*data)->y_Offset = 1500 / 2;
+	(*data)->zoom = 50;
+	(*data)->x_Offset = 1000 / 2;
+	(*data)->y_Offset = 1000 / 2;
 }
 
 

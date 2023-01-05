@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+         #
+#    By: verdant <verdant@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/25 11:35:04 by verdant           #+#    #+#              #
-#    Updated: 2023/01/04 18:50:01 by mwilsch          ###   ########.fr        #
+#    Updated: 2023/01/05 12:29:31 by verdant          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CC				=	gcc
 CFLAGS		=	-I include
 HEADERS		=	-I $(LIBMLX)/include -I /System/Volumes/Data/opt/homebrew/Cellar/glfw/3.3.8/include
 LIBMLX		=	./lib/MLX42
-LIBS	:= $(LIBMLX)/libmlx42.a -I include -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
+LIBS	:= $(LIBMLX)/libmlx42.a -ldl -lglfw -L /opt/homebrew/Cellar/glfw/3.3.8/lib/ -pthread -lm
 RM				=	rm -rf
 
 ## Colors ##
