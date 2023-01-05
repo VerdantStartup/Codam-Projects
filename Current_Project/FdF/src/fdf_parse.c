@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 11:20:36 by verdant           #+#    #+#             */
-/*   Updated: 2023/01/05 12:21:32 by verdant          ###   ########.fr       */
+/*   Updated: 2023/01/05 21:38:16 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_point *read_values(t_point *points, char *y_line, int y, t_data **data)
 	{
 		points[num_points].x = x;
 		points[num_points].y = y;
-		points[num_points].z = ft_atoi(x_line[y]);
+		points[num_points].z = ft_atoi(x_line[x]);
 		num_points++;
 		x++;
 	}
@@ -38,7 +38,8 @@ t_point	*parse_map(const char *filename, t_point *pts, t_data **data)
 	char		*y_line;
 	int			y;
 	
-	pts = malloc(sizeof(t_point) * (*data)->max_pts - 1);
+	printf("\n%d\n", (*data)->max_pts);
+	pts = malloc(sizeof(t_point) * (*data)->max_pts);
 	y = 0;
 	y_line = get_next_line(fd);
 	while (y_line)
@@ -48,6 +49,7 @@ t_point	*parse_map(const char *filename, t_point *pts, t_data **data)
 		free(y_line);
 		y_line = get_next_line(fd);
 	}
+	
 	close(fd);
 	return (pts);
 }

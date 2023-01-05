@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 08:51:07 by verdant           #+#    #+#             */
-/*   Updated: 2023/01/05 17:46:05 by verdant          ###   ########.fr       */
+/*   Updated: 2023/01/05 21:36:21 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,11 @@ int	get_max_points(const char *filename, t_data **data)
 void	set_data(t_data **data, const char *filename)
 {
 	(*data)->angle = 30 * (M_PI / 180);
-	(*data)->max_pts = (get_max_points(filename, data) - 1);
-	(*data)->zoom = 50;
+	(*data)->max_pts = (get_max_points(filename, data));
+	(*data)->zoom = 20;
 	(*data)->x_Offset = 1000 / 2;
 	(*data)->y_Offset = 1000 / 2;
+	(*data)->x_max = 19;
 }
 
 
@@ -74,5 +75,11 @@ int	main(int argc, char *argv[])
 		exit(1);
 	set_data(&data, filename);
 	points = parse_map(filename, points, &data);
+	for (int i = 0; i <= data->max_pts; i++)
+		printf("At %d\tz:%f\n", i, points[i].z);
+
+	
+		
 	create_projection(points, &data);
+	
 }

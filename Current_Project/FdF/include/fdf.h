@@ -6,7 +6,7 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 09:08:04 by verdant           #+#    #+#             */
-/*   Updated: 2023/01/04 21:16:42 by mwilsch          ###   ########.fr       */
+/*   Updated: 2023/01/05 20:23:39 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct point
 	float		y;
 	float		y_iso;
 	float		z;
+	// bool		is_last;
 	int			color; // Implemented after mandatory part
 } t_point;
 
@@ -45,6 +46,7 @@ typedef struct data
 	int		zoom;
 	int		x_Offset;
 	int		y_Offset;
+	int		x_max;
 } t_data;
 
 

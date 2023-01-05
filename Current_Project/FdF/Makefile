@@ -3,24 +3,30 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: verdant <verdant@student.42.fr>            +#+  +:+       +#+         #
+#    By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/25 11:35:04 by verdant           #+#    #+#              #
-#    Updated: 2023/01/05 12:29:31 by verdant          ###   ########.fr        #
+#    Updated: 2023/01/05 20:01:08 by mwilsch          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+# If on Codam Mac || Intel
+## -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
+# If on M1 ARM Processor
+## -lglfw -L /opt/homebrew/Cellar/glfw/3.3.8/lib/ -pthread -lm
+
 ## Marcos ##
-NAME			=	wireframe
-LIBFT			=	libft_with_all
+NAME		=	FdF
+LIBFT		=	libft_with_all
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
-CC				=	gcc
+CC			=	gcc
 CFLAGS		=	-I include
 HEADERS		=	-I $(LIBMLX)/include -I /System/Volumes/Data/opt/homebrew/Cellar/glfw/3.3.8/include
 LIBMLX		=	./lib/MLX42
-LIBS	:= $(LIBMLX)/libmlx42.a -ldl -lglfw -L /opt/homebrew/Cellar/glfw/3.3.8/lib/ -pthread -lm
-RM				=	rm -rf
+LIBS		:=	$(LIBMLX)/libmlx42.a -ldl -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
+
+RM			=	rm -rf
 
 ## Colors ##
 
@@ -53,11 +59,11 @@ start:
 
 all:	$(NAME)
 
-$(NAME):	$(OBJ) $(OBJF)
+$(NAME):	$(OBJ)
 			@$(CC) $(CLFAGS) $(OBJ) $(LIBS) $(HEADERS) libft.a -o $(NAME)
-			@echo "$(Magenta)Wireframe complied$(Reset)"
+			@echo "$(Magenta)FdF complied$(Reset)"
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(OBJF)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
 			@$(CC) $(CFLAGS) -c $< $(HEADERS) -o $@
 
 $(OBJF):
