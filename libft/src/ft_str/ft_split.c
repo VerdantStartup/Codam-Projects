@@ -6,32 +6,30 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 17:54:34 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/10/21 14:41:15 by mwilsch          ###   ########.fr       */
+/*   Updated: 2023/01/06 12:07:11 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-static size_t	count_words(char *str, char c)
+static	size_t	count_words(char *s, char c)
 {
-	size_t	counter;
-	int		reset;
+	int	cnt;
+	int i;
 
-	counter = 0;
-	reset = 1;
-	while (*str)
+	cnt = 0;
+	i = 0;
+	while (s[i])
 	{
-		if (*str != c && reset)
+		if (s[i] != c)
 		{
-			counter++;
-			reset = 0;
+			cnt++;
+			while (s[i] != c && s[i + 1])
+				i++;
 		}
-		else if (*str == c)
-			reset = 1;
-		str++;
+		i++;
 	}
-	return (counter);
+	return (cnt);
 }
 
 static void	free_mem(char **arr, size_t i)
