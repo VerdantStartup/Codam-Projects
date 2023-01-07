@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: verdant <verdant@student.42.fr>            +#+  +:+       +#+         #
+#    By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/21 14:13:12 by verdant           #+#    #+#              #
-#    Updated: 2022/12/25 11:30:52 by verdant          ###   ########.fr        #
+#    Updated: 2023/01/07 18:35:06 by mwilsch          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,9 @@ RM				= rm -rf
 AR				= ar rcs
 
 ###
+
+FT_EXTRA_DIR	=	ft_extra/
+FT_EXTRA			= ft_free_split ft_error
 
 FT_IS_DIR			=	ft_is/
 FT_IS					=	ft_isalnum ft_isalpha ft_isascii ft_isdigit ft_isprint
@@ -48,6 +51,7 @@ FT_PRINTF			= ft_printf ft_printf_utils ft_base_itoa
 GNL_DIR				= get_next_line/
 GNL						= get_next_line get_next_line_utils
 
+SRC_FILES+=$(addprefix $(FT_EXTRA_DIR),$(FT_EXTRA))
 SRC_FILES+=$(addprefix $(FT_IS_DIR),$(FT_IS))
 SRC_FILES+=$(addprefix $(FT_MEM_DIR),$(FT_MEM))
 SRC_FILES+=$(addprefix $(FT_PUT_DIR),$(FT_PUT))
@@ -78,6 +82,7 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(OBJF)
 
 $(OBJF):
 			@mkdir -p $(OBJ_DIR)
+			@mkdir -p $(OBJ_DIR)$(FT_EXTRA_DIR)
 			@mkdir -p $(OBJ_DIR)$(FT_IS_DIR)
 			@mkdir -p $(OBJ_DIR)$(FT_MEM_DIR)
 			@mkdir -p $(OBJ_DIR)$(FT_PUT_DIR)

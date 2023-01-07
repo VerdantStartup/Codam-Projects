@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 20:52:09 by mwilsch           #+#    #+#             */
-/*   Updated: 2022/12/22 14:01:21 by verdant          ###   ########.fr       */
+/*   Updated: 2023/01/07 18:37:26 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
+# include "ft_printf.h"
+# include "get_next_line.h"
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -71,5 +74,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 // My own functions
 size_t	ft_strclen(const char *s, char c);
+void		free_split(char **line);
+void		ft_error(char *msg);
 
 #endif
