@@ -11,27 +11,27 @@
 
 #include "../include/fdf.h"
 
+// x_offset is the width - x_new + the most left points to to center it
+// y_offset is the height - y_new + z value
+
 void	calc_offsets(t_point *pts,t_data **data)
 {
-	t_data *temp;
+	t_data	*t_d;
+	int			dimensions;
+	float		x_new;
+	float		y_new;
 	
-	temp = (*data);
+	t_d = (*data);
+	dimensions = (t_d->x_max - 1) + (t_d->y_max - 1);
+	x_new = dimensions * t_d->zoom * cos(t_d->angle);
+	y_new = dimensions * t_d->zoom * sin(t_d->angle);
 	CGDirectDisplayID mainDisplay = CGMainDisplayID();
 	CGRect screenRect = CGDisplayBounds(mainDisplay);
-
-	temp->width = screenRect.size.width;
-	temp->height = screenRect.size.height;
-	
- // With the help off (insert name here) we centered it on the y_axis and y_axis
-	float x_new = (((temp->x_max - 1) + ((temp->y_max - 1))) * temp->zoom) * cos(temp->angle);
-	float y_new = (((temp->x_max - 1) + (temp->y_max - 1)) * temp->zoom) * sin(temp->angle);
-
-	// x_offset is the width - x_new + the most left points to to center it
-	temp->x_Offset = (temp->width - x_new) / 2 + ((temp->y_max  - 1) * temp->zoom * cos(temp->angle));
-	// y_offset is the height - y_new + z value
-	temp->y_Offset = ((temp->height - y_new) / 2) + (pts[0].z * temp->z_zoom);
+	t_d->width = screenRect.size.width;
+	t_d->height = screenRect.size.height;
+	t_d->x_Offset = (t_d->width - x_new) / 2 + ((t_d->y_max  - 1) * t_d->zoom * cos(t_d->angle));
+	t_d->y_Offset = ((t_d->height - y_new) / 2) + (pts[0].z * t_d->z_zoom);
 }
-
 
 
 t_point *read_values(t_point *pts, char *y_line, int y, t_data **data)
@@ -49,6 +49,8 @@ t_point *read_values(t_point *pts, char *y_line, int y, t_data **data)
 		cnt++;
 		x++;
 	}
+	x = 0;
+	free_split(x_col);
 	return (pts);
 }
 
@@ -75,7 +77,7 @@ t_point	*parse_map(const char *filename, t_point *pts, t_data **data)
 
 
 // Data to print out
-	// // temp->y_Offset = temp->height / 3;
+	// // t_d->y_Offset = temp->height / 3;
 	// printf("y_offset %d\n", temp->y_Offset);
 	// // printf("y_new %f\n", y_new);
 	// printf("x_max %d\n", temp->x_max - 1);

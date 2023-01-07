@@ -6,7 +6,7 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 09:08:04 by verdant           #+#    #+#             */
-/*   Updated: 2023/01/07 14:07:34 by mwilsch          ###   ########.fr       */
+/*   Updated: 2023/01/07 19:27:54 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,22 @@
 typedef struct point
 {
 	float		x;
-	float		x_iso;
 	float		y;
-	float		y_iso;
 	float		z;
-	// bool		is_last;
+	float		x_iso;
+	float		y_iso;
 	int			color; // Implemented after mandatory part
 } t_point;
 
 typedef struct data
 {
 	double	angle;
-	double	angle_60;
 	int			max_pts;
 	int			zoom;
 	int			z_zoom;
 	int			width;
-	int			x_Offset;
 	int			height;
+	int			x_Offset;
 	int			y_Offset;
 	// int			padding;
 	int			x_max;
@@ -57,24 +55,40 @@ typedef struct data
 
 typedef struct draw_setup
 {
-	int test;
+	int					dx;
+	int					dy;
+	int					error;
+	int					x_step;
+	int					y_step;
+	int					x0;
+	int					x1;
+	int					y0;
+	int					y1;
+	mlx_t				*mlx;
+	mlx_image_t	*img;
 } t_helper;
 
 
-/*			Data			*/
+/*			Utils			*/
+int			get_max_points(const char *filename, t_data **data);
 void		calc_offsets(t_point *pts, t_data **data);
+void		free_split(char **line);
+void		mlx_setup(t_helper	*setup, t_data **data);
+void		cleaning_draw(t_helper *setup);
 
 /*			Error Handling			*/
 void		check_map(char *line, int x_cnt);
 void		ft_iserror(char *msg);
 
 /*			Parsing			*/
-t_point	*parse_map(const char *filename, t_point *pts, t_data **data);
 int			get_max_points(const char *filename, t_data **data);
+t_point	*parse_map(const char *filename, t_point *pts, t_data **data);
 
 /*			Drawing			*/
+t_point	*cvt_iso(t_point *pts, t_data **data);
+void		*draw_init(t_helper *setup, t_point *p0,t_point *p1);
+void		draw_line(t_point *p0, t_point *p1, t_helper *setup);
 void		create_projection(t_point *pts, t_data **data);
-
 
 
 #endif

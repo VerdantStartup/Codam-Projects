@@ -6,7 +6,7 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 09:12:23 by verdant           #+#    #+#             */
-/*   Updated: 2023/01/07 13:56:49 by mwilsch          ###   ########.fr       */
+/*   Updated: 2023/01/07 20:01:31 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,41 @@
 
 // If z is non-numeric (Not implemneted)
 
+
+// bool	check_chars(char	c)
+// {
+// 	if (c != ' ' && c != '\n')
+// 		return (false);
+// 	return (true);
+// }
+
+// void	check_values(char *filename)
+// {
+// 	const int	fd = open(filename, O_RDONLY);
+// 	int	i = 0;
+// 	char *line;
+
+// 	line = get_next_line(fd);
+// 	while (line)
+// 	{
+// 		while(line[i])
+// 		{
+// 			if (!check_chars(line[i]) && !ft_isdigit(line[i]))
+// 				ft_iserror("Incorrect Map");
+// 			i++;
+// 		}
+// 		free(line);
+// 		line = get_next_line(fd);
+// 	}
+// }
+
+
 void	check_map(char *line, int x_cnt)
 {
-	int			i;
-	int			cnt;
-	const int	size = ft_strlen(line) - 1;
-	char **line2 = ft_split(line, ' ');
+	int				i;
+	int				cnt;
+	const	int	size = ft_strlen(line) - 1;
+	char			**line2 = ft_split(line, ' ');
 
 	i = 0;
 	cnt = 0;
@@ -30,12 +59,12 @@ void	check_map(char *line, int x_cnt)
 	if (line[size] == '\n')
 	{
 		if (ft_isdigit(line[size - 1]))
-			return ;
+			return (free_split(line2));
 	}
 	else
 	{
 		if (ft_isdigit(line[size]))
-			return ;
+			return (free_split(line2));
 	}
 	ft_iserror("Check for spaces at the end of the line");
 }

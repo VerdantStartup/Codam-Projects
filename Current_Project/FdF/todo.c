@@ -1,14 +1,24 @@
 // A list of my ToDo's
 
+	// Extras
+		// 1. Leaks (DONE)
+		// 2. Norm`
+
+
 	// 0. Map parsing(Done)
 		// Error parsing for non-numeric input;
 
-	// 1. Dynmaic Inputs (Done)
+	// 1. Dynmaic Inputs
+		// Calculate a approiapte zoom and value
 
 	// 2. Shorten funcs
-		// 1. Draw line with the help of a struct
-		// 2. Create proejction
+		// 1. Draw line with the help of a struct (DONE)
+		// 2. Create proejction (DONE)
+		// 3. calc offsets (DONE)
 	// 3. Keyboard Hooks & Bonus Stuff
+		// Learn about keyhooks and set them up
+		// Translate 
+			// In other words make the wireframe moveable
 		// Make the Z zoom changeable
 		// ... More Ideas later ...
 

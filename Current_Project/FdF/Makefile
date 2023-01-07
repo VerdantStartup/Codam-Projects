@@ -6,7 +6,7 @@
 #    By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/25 11:35:04 by verdant           #+#    #+#              #
-#    Updated: 2023/01/06 17:26:59 by mwilsch          ###   ########.fr        #
+#    Updated: 2023/01/07 20:14:10 by mwilsch          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBFT			=	libft_with_all
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
 CC				=	gcc
-CFLAGS		=	-I include
+CFLAGS		= -g -I include
 HEADERS		=	-I $(LIBMLX)/include -I /System/Volumes/Data/opt/homebrew/Cellar/glfw/3.3.8/include
 LIBMLX		=	./lib/MLX42
 LIBS			=	$(LIBMLX)/libmlx42.a -ldl -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreGraphics
@@ -41,7 +41,7 @@ White			=	\033[37m
 
 ## Files ##
 
-SRC_FILES	=	fdf_error fdf_parse fdf_draw fdf
+SRC_FILES	=	fdf_utils fdf_error fdf_parse fdf_draw fdf
 
 SRC				=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ				=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
