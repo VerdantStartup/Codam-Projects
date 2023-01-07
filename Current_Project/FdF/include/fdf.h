@@ -6,7 +6,7 @@
 /*   By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 09:08:04 by verdant           #+#    #+#             */
-/*   Updated: 2023/01/05 20:23:39 by mwilsch          ###   ########.fr       */
+/*   Updated: 2023/01/07 14:07:34 by mwilsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include "../lib/MLX42/include/MLX42/MLX42.h"
 # include "../lib/MLX42/include/MLX42/MLX42_Input.h"
 # include "../lib/MLX42/include/MLX42/MLX42_Int.h"
+# include <CoreGraphics/CoreGraphics.h>
 # include <fcntl.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
 # include <unistd.h>
@@ -41,17 +41,32 @@ typedef struct point
 
 typedef struct data
 {
-	int		max_pts;
 	double	angle;
-	int		zoom;
-	int		x_Offset;
-	int		y_Offset;
-	int		x_max;
+	double	angle_60;
+	int			max_pts;
+	int			zoom;
+	int			z_zoom;
+	int			width;
+	int			x_Offset;
+	int			height;
+	int			y_Offset;
+	// int			padding;
+	int			x_max;
+	int			y_max;
 } t_data;
 
+typedef struct draw_setup
+{
+	int test;
+} t_helper;
+
+
+/*			Data			*/
+void		calc_offsets(t_point *pts, t_data **data);
 
 /*			Error Handling			*/
-void		ft_error(char *msg);
+void		check_map(char *line, int x_cnt);
+void		ft_iserror(char *msg);
 
 /*			Parsing			*/
 t_point	*parse_map(const char *filename, t_point *pts, t_data **data);
@@ -59,5 +74,7 @@ int			get_max_points(const char *filename, t_data **data);
 
 /*			Drawing			*/
 void		create_projection(t_point *pts, t_data **data);
+
+
 
 #endif

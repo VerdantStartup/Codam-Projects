@@ -6,7 +6,7 @@
 #    By: mwilsch <mwilsch@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/25 11:35:04 by verdant           #+#    #+#              #
-#    Updated: 2023/01/05 20:01:08 by mwilsch          ###   ########.fr        #
+#    Updated: 2023/01/06 17:26:59 by mwilsch          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,16 +16,15 @@
 ## -lglfw -L /opt/homebrew/Cellar/glfw/3.3.8/lib/ -pthread -lm
 
 ## Marcos ##
-NAME		=	FdF
-LIBFT		=	libft_with_all
+NAME			=	FdF
+LIBFT			=	libft_with_all
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
-CC			=	gcc
+CC				=	gcc
 CFLAGS		=	-I include
 HEADERS		=	-I $(LIBMLX)/include -I /System/Volumes/Data/opt/homebrew/Cellar/glfw/3.3.8/include
 LIBMLX		=	./lib/MLX42
-LIBS		:=	$(LIBMLX)/libmlx42.a -ldl -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
-
+LIBS			=	$(LIBMLX)/libmlx42.a -ldl -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreGraphics
 RM			=	rm -rf
 
 ## Colors ##
@@ -60,7 +59,7 @@ start:
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-			@$(CC) $(CLFAGS) $(OBJ) $(LIBS) $(HEADERS) libft.a -o $(NAME)
+			@$(CC) -g $(CLFAGS) $(OBJ) $(LIBS) $(HEADERS) libft.a -o $(NAME)
 			@echo "$(Magenta)FdF complied$(Reset)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
