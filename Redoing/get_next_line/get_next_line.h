@@ -6,7 +6,7 @@
 /*   By: verdant <verdant@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 17:20:13 by Verdant           #+#    #+#             */
-/*   Updated: 2023/01/10 12:30:17 by verdant          ###   ########.fr       */
+/*   Updated: 2023/01/10 16:01:51 by verdant          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // BUFFERSIZE = 1kb
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
+#  define BUFFER_SIZE 10
 # endif
 
 # include <unistd.h>

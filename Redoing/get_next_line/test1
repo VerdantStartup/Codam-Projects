@@ -1,0 +1,40 @@
+BUFFER_SIZE: 1
+Invalid fd          : 1.OK 2.OK 3.OK 4_LEAKS.OK 
+empty.txt           : 1.OK 2.OK 3_LEAKS.OK 
+1char.txt           : 1.OK 2.OK 3_LEAKS.KO 
+one_line_no_nl.txt  : 1.OK 2.OK 3_LEAKS.KO 
+only_nl.txt         : 1.OK 2.OK 3_LEAKS.KO 
+multiple_nl.txt     : 1.OK 2.OK 3.OK 4.OK 5.OK 6.OK 7_LEAKS.KO 
+variable_nls.txt    : 1.OK 2.OK 3.OK 4.OK 5.OK 6.OK 7.OK 8.OK 9.OK 10.OK 11.OK 12.OK 13.OK 14_LEAKS.KO 
+lines_around_10.txt : 1.OK 2.OK 3.OK 4.OK 5.OK 6.OK 7_LEAKS.KO 
+read_error.txt      : 1.OK 2.OK 3.OK 4.OK 5.OK 6.OK 7.OK 8.OK 9_LEAKS.KO 
+stdin               : 1.OK 2.OK 3.OK 4.OK 5.OK 6.OK 7_LEAKS.KO 
+
+BUFFER_SIZE: 10
+Invalid fd          : 1.OK 2.OK 3.OK 4_LEAKS.OK 
+empty.txt           : 1.OK 2.OK 3_LEAKS.OK 
+1char.txt           : 1.OK 2.OK 3_LEAKS.KO 
+one_line_no_nl.txt  : 1.OK 2.OK 3_LEAKS.KO 
+only_nl.txt         : 1.OK 2.OK 3_LEAKS.KO 
+multiple_nl.txt     : 1.OK 2.OK 3.OK 4.OK 5.OK 6.OK 7_LEAKS.KO 
+variable_nls.txt    : 1.OK 2.OK 3.OK 4.OK 5.OK 6.OK 7.OK 8.OK 9.OK 10.OK 11.OK 12.OK 13.OK 14_LEAKS.KO 
+lines_around_10.txt : 1.OK 2.OK 3.OK 4.OK 5.OK 6.OK 7_LEAKS.KO 
+giant_line.txt      : 1.OK 2.OK 3_LEAKS.KO 
+giant_line_nl.txt   : 1.OK 2.OK 3.OK 4_LEAKS.KO 
+read_error.txt      : 1.OK 2.OK 3.OK 4.KO 5.OK 6.OK 7.OK 8.OK 9_LEAKS.KO 
+limits              : 1.OK 2.OK 3_LEAKS.KO 4.OK 5.OK 6_LEAKS.KO 7.OK 8.OK 9_LEAKS.KO 10.OK 11.OK 12_LEAKS.KO 13.OK 14.OK 15_LEAKS.KO 16.OK 17.OK 18_LEAKS.KO 19.OK 20.OK 21_LEAKS.KO 22.OK 23.OK 24_LEAKS.KO 25.OK 26.OK 27_LEAKS.KO 28.OK 29.OK 30_LEAKS.KO 31.OK 32.OK 33_LEAKS.KO 34.OK 35.OK 36_LEAKS.KO 37.OK 38.OK 39.OK 40_LEAKS.KO 41.OK 42.OK 43.OK 44_LEAKS.KO 45.OK 46.OK 47.OK 48_LEAKS.KO 49.OK 50.OK 51.OK 52_LEAKS.KO 53.OK 54.OK 55.OK 56_LEAKS.KO 57.OK 58.OK 59.OK 60_LEAKS.KO 
+stdin               : 1.OK 2.OK 3.OK 4.OK 5.OK 6.OK 7_LEAKS.KO 
+
+BUFFER_SIZE: 1000000
+Invalid fd          : 1.OK 2.OK 3.OK 4_LEAKS.OK 
+empty.txt           : 1.OK 2.OK 3_LEAKS.OK 
+1char.txt           : 1.OK 2.OK 3_LEAKS.KO 
+one_line_no_nl.txt  : 1.OK 2.OK 3_LEAKS.KO 
+only_nl.txt         : 1.OK 2.OK 3_LEAKS.KO 
+multiple_nl.txt     : 1.OK 2.OK 3.OK 4.OK 5.OK 6.OK 7_LEAKS.KO 
+variable_nls.txt    : 1.OK 2.OK 3.OK 4.OK 5.OK 6.OK 7.OK 8.OK 9.OK 10.OK 11.OK 12.OK 13.OK 14_LEAKS.KO 
+lines_around_10.txt : 1.OK 2.OK 3.OK 4.OK 5.OK 6.OK 7_LEAKS.KO 
+giant_line.txt      : 1.OK 2.OK 3_LEAKS.KO 
+giant_line_nl.txt   : 1.OK 2.OK 3.OK 4_LEAKS.KO 
+read_error.txt      : 1.OK 2.OK 3.KO 4.KO 5.KO 6.KO 7.KO 8.KO 9_LEAKS.KO 
+stdin               : 1.OK 2.OK 3.OK 4.OK 5.OK 6.OK 7_LEAKS.KO 
